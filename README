@@ -1,0 +1,5 @@
+pygl: A port a my OpenGL lua binding to python
+      As the lua binding hasn't been updated for long, only OpenGL API up to 2.1 is supported.
+
+NOTE: There is an official OpenGL binding for python.
+      If you can use it, you'd probably better use it.

@@ -1835,13 +1835,16 @@ class PyGLUT
     static PyObject* py_glutExit(PyObject *, PyObject *args)
     {
       int code = 0;
+      
       if (PyTuple_Size(args) == 1)
       {
         code = PyInt_AsLong(PyTuple_GetItem(args, 0));
       }
+      
       Py_Finalize();
-      // cleanup python
       exit(code);
+      
+      return NULL;
     }
     
   public:
@@ -2242,9 +2245,3 @@ bool PyGL_InitGLUT(PyObject *mod)
   
   return true;
 }
-
-PyMODINIT_FUNC initglut(void)
-{
-  PyGL_InitGLUT(NULL);
-}
-

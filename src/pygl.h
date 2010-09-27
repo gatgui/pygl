@@ -114,8 +114,6 @@ class PyGL
     
     void initFunctions();
     
-    PyMethodDef* getPyFunctions();
-    
     void registerPyFunctions(PyObject *m);
     
     void registerPyConstants(PyObject *m);

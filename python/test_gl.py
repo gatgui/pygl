@@ -201,17 +201,17 @@ def menu(val):
 def submenu(val):
   print("SubMenuEntry %s selected: %s" % (val, ["Hello", "Goodbye"][val]))
 
-def timer():
+def fade():
   global elapsed_time, step, time_param
   
-  time_param = elapsed_time * 0.001
+  time_param = elapsed_time * 0.01
   elapsed_time = elapsed_time + step
-  if elapsed_time >= 1000:
+  if elapsed_time >= 100:
     step = -1
   elif elapsed_time == 0:
     step = 1
   glut.PostRedisplay()
-  glut.TimerFunc(1, timer, 0)
+  #glut.TimerFunc(1, fade, 0)
 
 def printMatrix(m):
   s = ""
@@ -249,7 +249,8 @@ initGL()
 glut.DisplayFunc(display)
 glut.ReshapeFunc(reshape)
 glut.KeyboardFunc(keyboard)
-glut.TimerFunc(1, timer, 0)
+#glut.TimerFunc(1, fade, 0)
+glut.IdleFunc(fade)
 
 smid = glut.CreateMenu(submenu)
 glut.AddMenuEntry("Hello", 0)

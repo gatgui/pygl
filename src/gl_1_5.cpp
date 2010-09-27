@@ -103,9 +103,7 @@ static PyObject* py_glGetBufferPointer(PyObject *, PyObject *args) {
   Enum pname(PyTuple_GetItem(args, 1));
   GLvoid *ptr=0;
   glGetBufferPointerv(target, pname, &ptr);
-  PyObject *rv = PyObject_CallObject((PyObject*)&PyGL_Buffer_RawPtrType, NULL);
-  ((PyGL_Buffer_RawPtr*)rv)->ptr = ptr;
-  return rv;
+  return PyCObject_FromVoidPtr(ptr, NULL);
 }
 
 static PyObject* py_glGetBufferSubData(PyObject *self, PyObject *args) {
@@ -133,9 +131,7 @@ static PyObject* py_glMapBuffer(PyObject *, PyObject *args) {
   Enum target(PyTuple_GetItem(args, 0));
   Enum access(PyTuple_GetItem(args, 1));
   GLvoid *ptr = glMapBuffer(target, access);
-  PyObject *rv = PyObject_CallObject((PyObject*)&PyGL_Buffer_RawPtrType, NULL);
-  ((PyGL_Buffer_RawPtr*)rv)->ptr = ptr;
-  return rv;
+  return PyCObject_FromVoidPtr(ptr, NULL);
 }
 
 static PyObject* py_glUnmapBuffer(PyObject *, PyObject *args) {

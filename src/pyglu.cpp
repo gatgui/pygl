@@ -31,12 +31,6 @@ USA.
     mFunctions.push_back(tmp);\
   }
 
-PyObject* NewPythonPtr(void *ptr)
-{
-  PyObject *rv = PyObject_CallObject((PyObject*)&PyGL_Buffer_RawPtrType, NULL);
-  ((PyGL_Buffer_RawPtr*)rv)->ptr = ptr;
-  return rv;
-}
 
 class PyGLU
 {
@@ -962,7 +956,7 @@ class PyGLU
     {
       CHECK_ARG_COUNT(args, 0);
       GLUquadric *q = gluNewQuadric();
-      return NewPythonPtr(q);
+      return PyCObject_FromVoidPtr((void*)q, NULL);
     }
     
     static PyObject* py_gluDeleteQuadric(PyObject *self, PyObject *args)
@@ -1034,7 +1028,7 @@ class PyGLU
     {
       CHECK_ARG_COUNT(args, 0);
       GLUtesselator *t = gluNewTess();
-      return NewPythonPtr(t);
+      return PyCObject_FromVoidPtr((void*)t, NULL);
     }
     
     static PyObject* py_gluDeleteTess(PyObject *self, PyObject *args)
@@ -1124,7 +1118,7 @@ class PyGLU
     {
       CHECK_ARG_COUNT(args, 0);
       GLUnurbs *n = gluNewNurbsRenderer();
-      return NewPythonPtr(n);
+      return PyCObject_FromVoidPtr((void*)n, NULL);
     }
     
     static PyObject* py_gluDeleteNurbsRenderer(PyObject *, PyObject *args)
@@ -1795,10 +1789,3 @@ bool PyGL_InitGLU(PyObject *mod)
   
   return true;
 }
-
-PyMODINIT_FUNC initglu(void)
-{
-  PyGL_InitGLU(NULL);
-}
-
-

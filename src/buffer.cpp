@@ -473,52 +473,6 @@ PyObject* PyGL_Buffer_Structure_ToString(PyObject *self)
 
 // ---
 
-PyTypeObject PyGL_Buffer_RawPtrType;
-
-PyObject* PyGL_Buffer_RawPtr_New(PyTypeObject *t, PyObject *, PyObject *)
-{
-  PyObject *self = t->tp_alloc(t, 0);
-  ((PyGL_Buffer_RawPtr*)self)->ptr = 0;
-  return self;
-}
-
-int PyGL_Buffer_RawPtr_Init(PyObject *, PyObject *, PyObject *)
-{
-  return 0;
-}
-
-void PyGL_Buffer_RawPtr_Delete(PyObject *self)
-{
-  self->ob_type->tp_free(self);
-}
-
-PyObject* PyGL_Buffer_RawPtr_IsNull(PyObject *self, void*)
-{
-  if (((PyGL_Buffer_RawPtr*)self)->ptr != 0)
-  {
-    Py_RETURN_FALSE;
-  }
-  else
-  {
-    Py_RETURN_TRUE;
-  }
-}
-
-PyObject* PyGL_Buffer_RawPtr_ToStr(PyObject *self)
-{
-  std::ostringstream oss;
-  oss << std::hex << ((PyGL_Buffer_RawPtr*)self)->ptr << std::dec;
-  return PyString_FromString(oss.str().c_str());
-}
-
-PyGetSetDef PyGL_Buffer_RawPtr_GetSeters[] =
-{
-  {(char*)"null", PyGL_Buffer_RawPtr_IsNull, NULL, NULL, NULL},
-  {NULL, NULL, NULL, NULL, NULL}
-};
-
-// ---
-
 template <DataType DT>
 struct PyGL_Buffer_Buffer
 {
@@ -633,9 +587,7 @@ PyObject* PyGL_Buffer_Buffer_GetRawPtr(PyObject *self, void*)
   
   typename Buffer<DT>::T *ptr = (typename Buffer<DT>::T *) *(pbuf->pb);
   
-  PyObject *rv = PyObject_CallObject((PyObject*)&PyGL_Buffer_RawPtrType, NULL);
-  ((PyGL_Buffer_RawPtr*)rv)->ptr = (void*)ptr;
-  return rv;
+  return PyCObject_FromVoidPtr((void*)ptr, NULL);
 }
 
 template <DataType DT>
@@ -954,9 +906,7 @@ PyObject* PyGL_Buffer_StructuredBuffer_GetRawPtr(PyObject *self, void*)
   
   typename StructuredBuffer<DT>::T *ptr = (typename StructuredBuffer<DT>::T *) *(pbuf->pb);
   
-  PyObject *rv = PyObject_CallObject((PyObject*)&PyGL_Buffer_RawPtrType, NULL);
-  ((PyGL_Buffer_RawPtr*)rv)->ptr = (void*) ptr;
-  return rv;
+  return PyCObject_FromVoidPtr((void*)ptr, NULL);
 }
 
 template <DataType DT>
@@ -1638,20 +1588,6 @@ bool PyGL_InitBuffer(PyObject *mod)
     return false;
   }
   
-  INIT_TYPE(PyGL_Buffer_RawPtrType, "pygl.buffer.RawPtr", PyGL_Buffer_RawPtr);
-  PyGL_Buffer_RawPtrType.tp_flags = Py_TPFLAGS_DEFAULT;
-  PyGL_Buffer_RawPtrType.tp_new = PyGL_Buffer_RawPtr_New;
-  PyGL_Buffer_RawPtrType.tp_init = PyGL_Buffer_RawPtr_Init;
-  PyGL_Buffer_RawPtrType.tp_dealloc = PyGL_Buffer_RawPtr_Delete;
-  PyGL_Buffer_RawPtrType.tp_getset = PyGL_Buffer_RawPtr_GetSeters;
-  PyGL_Buffer_RawPtrType.tp_str = PyGL_Buffer_RawPtr_ToStr;
-  
-  if (PyType_Ready(&PyGL_Buffer_RawPtrType) < 0)
-  {
-    Py_DECREF(smod);
-    return false;
-  }
-  
   PyObject *bufferb = InitBufferClass<DT_BYTE>("pygl.buffer.ByteBuffer");
   if (!bufferb)
   {
@@ -1794,9 +1730,6 @@ bool PyGL_InitBuffer(PyObject *mod)
   
   Py_INCREF(&PyGL_Buffer_StructureType);
   PyModule_AddObject(smod, "Structure", (PyObject*)&PyGL_Buffer_StructureType);
-  
-  Py_INCREF(&PyGL_Buffer_RawPtrType);
-  PyModule_AddObject(smod, "RawPtr", (PyObject*)&PyGL_Buffer_RawPtrType);
   
   Py_INCREF(bufferb);
   PyModule_AddObject(smod, "ByteBuffer", bufferb);

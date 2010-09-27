@@ -1677,15 +1677,12 @@ static PyObject* py_glGetPolygonStipple(PyObject *self, PyObject *args) {
   return WrapFunc1<TypedPtr<Ubyte> >::Call(self, args, glGetPolygonStipple);
 }
 
-//static PyObject* py_glGetPointerv(PyObject *self, PyObject *args) {
 static PyObject* py_glGetPointer(PyObject *, PyObject *args) {
   CHECK_ARG_COUNT(args, 1);
   Enum param(PyTuple_GetItem(args, 0));
   GLvoid *ptr;
   glGetPointerv(param, &ptr);
-  PyObject *rv = PyObject_CallObject((PyObject*)&PyGL_Buffer_RawPtrType, NULL);
-  ((PyGL_Buffer_RawPtr*)rv)->ptr = ptr;
-  return rv;
+  return PyCObject_FromVoidPtr(ptr, NULL);
 }
 
 

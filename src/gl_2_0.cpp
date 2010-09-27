@@ -348,9 +348,7 @@ static PyObject* py_glGetVertexAttribPointer(PyObject *, PyObject *args) {
   Enum param(PyTuple_GetItem(args, 1));
   GLvoid *ptr = 0;
   glGetVertexAttribPointerv(prg, param, &ptr);
-  PyObject *rv = PyObject_CallObject((PyObject*)&PyGL_Buffer_RawPtrType, NULL);
-  ((PyGL_Buffer_RawPtr*)rv)->ptr = ptr;
-  return rv;
+  return PyCObject_FromVoidPtr(ptr, NULL);
 }
 
 static PyObject* py_glGetVertexAttrib(PyObject *, PyObject *args) {

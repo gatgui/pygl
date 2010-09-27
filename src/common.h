@@ -57,12 +57,4 @@ USA.
   ptype.tp_basicsize = sizeof(ctype)
 
 
-typedef struct
-{
-  PyObject_HEAD
-  void *ptr;
-} PyGL_Buffer_RawPtr;
-
-extern PyTypeObject PyGL_Buffer_RawPtrType;
-
 #endif

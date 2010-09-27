@@ -651,9 +651,7 @@ static PyObject* py_glMapBufferARB(PyObject *, PyObject *args) {
   CHECK_ARG_COUNT(args, 2);
   Enum target(PyTuple_GetItem(args, 0));
   Enum access(PyTuple_GetItem(args, 1));
-  PyObject *rv = PyObject_CallObject((PyObject*)&PyGL_Buffer_RawPtrType, NULL);
-  ((PyGL_Buffer_RawPtr*)rv)->ptr = glMapBufferARB(target, access);
-  return rv;
+  return PyCObject_FromVoidPtr(glMapBufferARB(target, access), NULL);
 }
 static PyObject* py_glUnmapBufferARB(PyObject *, PyObject *args) {
   CHECK_ARG_COUNT(args, 1);
@@ -668,9 +666,7 @@ static PyObject* py_glGetBufferPointerARB(PyObject *, PyObject *args) {
   Enum pname(PyTuple_GetItem(args, 1));
   GLvoid *ptr;
   glGetBufferPointervARB(target, pname, &ptr);
-  PyObject *rv = PyObject_CallObject((PyObject*)&PyGL_Buffer_RawPtrType, NULL);
-  ((PyGL_Buffer_RawPtr*)rv)->ptr = ptr;
-  return rv;
+  return PyCObject_FromVoidPtr(ptr, NULL);
 }
 static PyObject* py_glGetBufferSubDataARB(PyObject *self, PyObject *args) {
   return WrapFunc4<Enum, Intptr, Sizeiptr, Ptr >::Call(self, args, glGetBufferSubDataARB);
@@ -956,9 +952,7 @@ static PyObject* py_glGetVertexAttribPointerARB(PyObject *, PyObject *args) {
   Enum pname(PyTuple_GetItem(args, 1));
   GLvoid *ptr;
   glGetVertexAttribPointervARB(index, pname, &ptr);
-  PyObject *rv = PyObject_CallObject((PyObject*)&PyGL_Buffer_RawPtrType, NULL);
-  ((PyGL_Buffer_RawPtr*)rv)->ptr = ptr;
-  return rv;
+  return PyCObject_FromVoidPtr(ptr, NULL);
 }
 static PyObject* py_glGetVertexAttribARB(PyObject *, PyObject *args) {
   CHECK_ARG_COUNT(args, 2);

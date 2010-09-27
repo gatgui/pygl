@@ -122,27 +122,6 @@ void PyGL::initFunctions()
   Register_GL_ARB_Functions(mFunctions);
 }
 
-PyMethodDef* PyGL::getPyFunctions()
-{
-  if (mFunctions.size() > 0)
-  {
-    return &(mFunctions[0]);
-  }
-  
-  glewInit();
-  
-  initFunctions();
-  
-  PyMethodDef null = {NULL, NULL, NULL, NULL};
-
-  if (mFunctions.size() == 0 || mFunctions.back() != null)
-  {
-    mFunctions.push_back(null);
-  }
-
-  return &(mFunctions[0]);
-}
-
 void PyGL::registerPyFunctions(PyObject *m)
 {
   if (mFunctions.size() > 0)
@@ -194,12 +173,11 @@ static PyObject* Init(PyObject *, PyObject *)
   PyGL &gl = PyGL::Instance();
   
   PyObject *mod = gl.getPyModule();
-  if (mod != Py_None)
+  if (mod != NULL)
   {
     gl.registerPyFunctions(mod);
     gl.registerPyConstants(mod);
   }
-  Py_DECREF(mod);
   
   Py_RETURN_NONE;
 }
@@ -236,9 +214,3 @@ bool PyGL_InitGL(PyObject *mod)
   
   return true;
 }
-
-PyMODINIT_FUNC initgl(void)
-{
-  PyGL_InitGL(NULL);
-}
-

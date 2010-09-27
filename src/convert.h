@@ -199,9 +199,9 @@ struct Ptr
   
   inline void fromPy(PyObject *obj)
   {
-    if (PyObject_TypeCheck(obj, &PyGL_Buffer_RawPtrType))
+    if (PyCObject_Check(obj))
     {
-      value = ((PyGL_Buffer_RawPtr*)obj)->ptr;
+      value = PyCObject_AsVoidPtr(obj);
     }
     else
     {
@@ -211,9 +211,7 @@ struct Ptr
   
   inline PyObject* toPy()
   {
-    PyObject *rv = PyObject_CallObject((PyObject*)&PyGL_Buffer_RawPtrType, NULL);
-    ((PyGL_Buffer_RawPtr*)rv)->ptr = value;
-    return rv;
+    return PyCObject_FromVoidPtr(value, NULL);
   }
   
   inline operator T () const
@@ -249,9 +247,9 @@ struct ConstPtr
   
   inline void fromPy(PyObject *obj)
   {
-    if (PyObject_TypeCheck(obj, &PyGL_Buffer_RawPtrType))
+    if (PyCObject_Check(obj))
     {
-      value = ((PyGL_Buffer_RawPtr*)obj)->ptr;
+      value = PyCObject_AsVoidPtr(obj);
     }
     else
     {
@@ -261,9 +259,7 @@ struct ConstPtr
   
   inline PyObject* toPy()
   {
-    PyObject *rv = PyObject_CallObject((PyObject*)&PyGL_Buffer_RawPtrType, NULL);
-    ((PyGL_Buffer_RawPtr*)rv)->ptr = (void*) value;
-    return rv;
+    return PyCObject_FromVoidPtr((void*)value, NULL);
   }
   
   inline operator T () const
@@ -300,9 +296,9 @@ struct TypedPtr
   
   inline void fromPy(PyObject *obj)
   {
-    if (PyObject_TypeCheck(obj, &PyGL_Buffer_RawPtrType))
+    if (PyCObject_Check(obj))
     {
-      value = (T) ((PyGL_Buffer_RawPtr*)obj)->ptr;
+      value = (T) PyCObject_AsVoidPtr(obj);
     }
     else
     {
@@ -312,9 +308,7 @@ struct TypedPtr
   
   inline PyObject* toPy()
   {
-    PyObject *rv = PyObject_CallObject((PyObject*)&PyGL_Buffer_RawPtrType, NULL);
-    ((PyGL_Buffer_RawPtr*)rv)->ptr = (void*) value;
-    return rv;
+    return PyCObject_FromVoidPtr((void*)value, NULL);
   }
   
   inline operator T () const
@@ -351,9 +345,9 @@ struct ConstTypedPtr
   
   inline void fromPy(PyObject *obj)
   {
-    if (PyObject_TypeCheck(obj, &PyGL_Buffer_RawPtrType))
+    if (PyCObject_Check(obj))
     {
-      value = (T) ((PyGL_Buffer_RawPtr*)obj)->ptr;
+      value = (T) PyCObject_AsVoidPtr(obj);
     }
     else
     {
@@ -363,9 +357,7 @@ struct ConstTypedPtr
   
   inline PyObject* toPy()
   {
-    PyObject *rv = PyObject_CallObject((PyObject*)&PyGL_Buffer_RawPtrType, NULL);
-    ((PyGL_Buffer_RawPtr*)rv)->ptr = (void*) value;
-    return rv;
+    return PyCObject_FromVoidPtr((void*)value, NULL);
   }
   
   inline operator T () const

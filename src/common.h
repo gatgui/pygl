@@ -34,6 +34,7 @@ USA.
 # define CALLBACK
 #endif
 
+#include <Python.h>
 #include <GL/glew.h>
 #include <iostream>
 #include <cassert>
@@ -43,8 +44,6 @@ USA.
 #include <map>
 #include <stdexcept>
 #include <sstream>
-
-#include <Python.h>
 
 #include "mem/manager.h"
 

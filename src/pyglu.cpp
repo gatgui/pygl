@@ -414,11 +414,11 @@ class PyGLU
     
   public: // Callbacks management
     
-//#ifdef __APPLE__
-//    typedef GLvoid (CALLBACK *GLUcallback)(...);
-//#else
+#ifdef PYGL_GLU_VARIADIC_CALLBACK
+    typedef GLvoid (CALLBACK *GLUcallback)(...);
+#else
     typedef void (CALLBACK *GLUcallback)();
-//#endif
+#endif
 
     // Quadrics
   

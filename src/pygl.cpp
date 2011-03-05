@@ -79,10 +79,6 @@ PyGL::PyGL()
 PyGL::~PyGL()
 {
   msInstance = 0;
-  if (MemoryManager::InstancePtr())
-  {
-    delete MemoryManager::InstancePtr();
-  }
 }
 
 GLenum PyGL::getConstant(const std::string &name)

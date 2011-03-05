@@ -45,8 +45,6 @@ USA.
 #include <stdexcept>
 #include <sstream>
 
-#include "mem/manager.h"
-
 
 #define INIT_TYPE(ptype, name, ctype)\
   memset(&ptype, 0, sizeof(PyTypeObject));\

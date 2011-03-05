@@ -25,7 +25,6 @@ USA.
 #define __pygl_array_h_
 
 #include "common.h"
-#include "mem/managedobject.h"
 
 enum
 {
@@ -36,7 +35,7 @@ enum
 extern int CheckArraySize(PyObject *arg);
 
 template <typename U>
-class Array1D : public MemoryManagedObject
+class Array1D
 {
   public:
     
@@ -61,8 +60,7 @@ class Array1D : public MemoryManagedObject
     Array1D(int sz)
       : mSize(sz), mOwns(true)
     {
-      //mData = new T[sz];
-      mData = (T*) MemoryManager::Instance().allocate(sz * sizeof(T));
+      mData = new T[sz];
     }
     
     Array1D(const Array1D<U> &rhs)
@@ -75,8 +73,7 @@ class Array1D : public MemoryManagedObject
     {
       if (mData && mOwns)
       {
-        //delete[] mData;
-        MemoryManager::Instance().deallocate(mData, mSize * sizeof(T));
+        delete[] mData;
       }
     }
     
@@ -86,8 +83,7 @@ class Array1D : public MemoryManagedObject
       {
         if (mData && mOwns)
         {
-          //delete[] mData;
-          MemoryManager::Instance().deallocate(mData, mSize*sizeof(T));
+          delete[] mData;
         }
         mData = rhs.mData;
         mSize = rhs.mSize;
@@ -141,8 +137,7 @@ class Array1D : public MemoryManagedObject
     {
       if (mData && mOwns)
       {
-        //delete[] mData;
-        MemoryManager::Instance().deallocate(mData, mSize*sizeof(T));
+        delete[] mData;
       }
       
       mData = 0;
@@ -153,7 +148,7 @@ class Array1D : public MemoryManagedObject
       
       if (mSize > 0)
       {
-        mData = (T*) MemoryManager::Instance().allocate(mSize*sizeof(T));
+        mData = new T[mSize];
         for (int i=0; i<mSize; ++i)
         {
           PyObject *item = PySequence_GetItem(o, i);
@@ -175,7 +170,7 @@ class Array1D : public MemoryManagedObject
 
 
 template <typename U>
-class FlatArray2D : public MemoryManagedObject
+class FlatArray2D
 {
   public:
     
@@ -189,8 +184,7 @@ class FlatArray2D : public MemoryManagedObject
     FlatArray2D(int nr, int nc)
       : mRowSize(nr), mColSize(nc), mOwns(true)
     {
-      //mData = new T[nr * nc];
-      mData = (T*) MemoryManager::Instance().allocate(nr * nc * sizeof(T));
+      mData = new T[nr * nc];
     }
     
     FlatArray2D(T *data, int nr, int nc)
@@ -215,8 +209,7 @@ class FlatArray2D : public MemoryManagedObject
     {
       if (mData && mOwns)
       {
-        //delete[] mData;
-        MemoryManager::Instance().deallocate(mData, mRowSize*mColSize*sizeof(T));
+        delete[] mData;
       }
     }
     
@@ -226,8 +219,7 @@ class FlatArray2D : public MemoryManagedObject
       {
         if (mData && mOwns)
         {
-          //delete[] mData;
-          MemoryManager::Instance().deallocate(mData, mRowSize*mColSize*sizeof(T));
+          delete[] mData;
         }
         mData = rhs.mData;
         mRowSize = rhs.mRowSize;
@@ -332,8 +324,7 @@ class FlatArray2D : public MemoryManagedObject
     {
       if (mData && mOwns)
       {
-        //delete[] mData;
-        MemoryManager::Instance().deallocate(mData, mRowSize*mColSize*sizeof(T));
+        delete[] mData;
       }
       
       mRowSize = 0;
@@ -400,8 +391,7 @@ class FlatArray2D : public MemoryManagedObject
           mRowStride = mRowSize;
         }
         
-        //mData = new T[mRowSize * mColSize];
-        mData = (T*) MemoryManager::Instance().allocate(mRowSize * mColSize * sizeof(T));        
+        mData = new T[mRowSize * mColSize];
         
         if (pyformat == COLUMN_MAJOR)
         {

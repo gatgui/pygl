@@ -892,7 +892,7 @@ class PyGLU
         PyErr_SetString(PyExc_RuntimeError, "glu.UnProject: invalid proj matrix");
         return NULL;
       }
-      Array1D<Int> viewport(PyTuple_GetItem(args, 6));
+      Array1D<Int> viewport(PyTuple_GetItem(args, 5));
       if (viewport.size() != 4)
       {
         PyErr_SetString(PyExc_RuntimeError, "glu.UnProject: invalid viewport");

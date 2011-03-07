@@ -94,40 +94,40 @@ static PyObject* py_glVertex4d(PyObject *self, PyObject *args) {
   return WrapFunc4<Double, Double, Double, Double>::Call(self, args, glVertex4d);
 }
 static PyObject* py_glVertex2sv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Short> >::Call(self, args, glVertex2sv);
+  return WrapFunc1<ConstArrayN<Short, 2> >::Call(self, args, glVertex2sv);
 }
 static PyObject* py_glVertex2iv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Int> >::Call(self, args, glVertex2iv);
+  return WrapFunc1<ConstArrayN<Int, 2> >::Call(self, args, glVertex2iv);
 }
 static PyObject* py_glVertex2fv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Float> >::Call(self, args, glVertex2fv);
+  return WrapFunc1<ConstArrayN<Float, 2> >::Call(self, args, glVertex2fv);
 }
 static PyObject* py_glVertex2dv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Double> >::Call(self, args, glVertex2dv);
+  return WrapFunc1<ConstArrayN<Double, 2> >::Call(self, args, glVertex2dv);
 }
 static PyObject* py_glVertex3sv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Short> >::Call(self, args, glVertex3sv);
+  return WrapFunc1<ConstArrayN<Short, 3> >::Call(self, args, glVertex3sv);
 }
 static PyObject* py_glVertex3iv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Int> >::Call(self, args, glVertex3iv);
+  return WrapFunc1<ConstArrayN<Int, 3> >::Call(self, args, glVertex3iv);
 }
 static PyObject* py_glVertex3fv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Float> >::Call(self, args, glVertex3fv);
+  return WrapFunc1<ConstArrayN<Float, 3> >::Call(self, args, glVertex3fv);
 }
 static PyObject* py_glVertex3dv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Double> >::Call(self, args, glVertex3dv);
+  return WrapFunc1<ConstArrayN<Double, 3> >::Call(self, args, glVertex3dv);
 }
 static PyObject* py_glVertex4sv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Short> >::Call(self, args, glVertex4sv);
+  return WrapFunc1<ConstArrayN<Short, 4> >::Call(self, args, glVertex4sv);
 }
 static PyObject* py_glVertex4iv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Int> >::Call(self, args, glVertex4iv);
+  return WrapFunc1<ConstArrayN<Int, 4> >::Call(self, args, glVertex4iv);
 }
 static PyObject* py_glVertex4fv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Float> >::Call(self, args, glVertex4fv);
+  return WrapFunc1<ConstArrayN<Float, 4> >::Call(self, args, glVertex4fv);
 }
 static PyObject* py_glVertex4dv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Double> >::Call(self, args, glVertex4dv);
+  return WrapFunc1<ConstArrayN<Double, 4> >::Call(self, args, glVertex4dv);
 }
 
 static PyObject* py_glTexCoord1s(PyObject *self, PyObject *args) {
@@ -156,16 +156,16 @@ static PyObject* py_glTexCoord2d(PyObject *self, PyObject *args) {
   return WrapFunc2<Double, Double>::Call(self, args, glTexCoord2d);
 }
 static PyObject* py_glTexCoord2sv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Short> >::Call(self, args, glTexCoord2sv);
+  return WrapFunc1<ConstArrayN<Short, 2> >::Call(self, args, glTexCoord2sv);
 }
 static PyObject* py_glTexCoord2iv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Int> >::Call(self, args, glTexCoord2iv);
+  return WrapFunc1<ConstArrayN<Int, 2> >::Call(self, args, glTexCoord2iv);
 }
 static PyObject* py_glTexCoord2fv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Float> >::Call(self, args, glTexCoord2fv);
+  return WrapFunc1<ConstArrayN<Float, 2> >::Call(self, args, glTexCoord2fv);
 }
 static PyObject* py_glTexCoord2dv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Double> >::Call(self, args, glTexCoord2dv);
+  return WrapFunc1<ConstArrayN<Double, 2> >::Call(self, args, glTexCoord2dv);
 }
 static PyObject* py_glTexCoord3s(PyObject *self, PyObject *args) {
   return WrapFunc3<Short, Short, Short>::Call(self, args, glTexCoord3s);
@@ -180,16 +180,16 @@ static PyObject* py_glTexCoord3d(PyObject *self, PyObject *args) {
   return WrapFunc3<Double, Double, Double>::Call(self, args, glTexCoord3d);
 }
 static PyObject* py_glTexCoord3sv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Short> >::Call(self, args, glTexCoord3sv);
+  return WrapFunc1<ConstArrayN<Short, 3> >::Call(self, args, glTexCoord3sv);
 }
 static PyObject* py_glTexCoord3iv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Int> >::Call(self, args, glTexCoord3iv);
+  return WrapFunc1<ConstArrayN<Int, 3> >::Call(self, args, glTexCoord3iv);
 }
 static PyObject* py_glTexCoord3fv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Float> >::Call(self, args, glTexCoord3fv);
+  return WrapFunc1<ConstArrayN<Float, 3> >::Call(self, args, glTexCoord3fv);
 }
 static PyObject* py_glTexCoord3dv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Double> >::Call(self, args, glTexCoord3dv);
+  return WrapFunc1<ConstArrayN<Double, 3> >::Call(self, args, glTexCoord3dv);
 }
 static PyObject* py_glTexCoord4s(PyObject *self, PyObject *args) {
   return WrapFunc4<Short, Short, Short, Short>::Call(self, args, glTexCoord4s);
@@ -204,16 +204,16 @@ static PyObject* py_glTexCoord4d(PyObject *self, PyObject *args) {
   return WrapFunc4<Double, Double, Double, Double>::Call(self, args, glTexCoord4d);
 }
 static PyObject* py_glTexCoord4sv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Short> >::Call(self, args, glTexCoord4sv);
+  return WrapFunc1<ConstArrayN<Short, 4> >::Call(self, args, glTexCoord4sv);
 }
 static PyObject* py_glTexCoord4iv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Int> >::Call(self, args, glTexCoord4iv);
+  return WrapFunc1<ConstArrayN<Int, 4> >::Call(self, args, glTexCoord4iv);
 }
 static PyObject* py_glTexCoord4fv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Float> >::Call(self, args, glTexCoord4fv);
+  return WrapFunc1<ConstArrayN<Float, 4> >::Call(self, args, glTexCoord4fv);
 }
 static PyObject* py_glTexCoord4dv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Double> >::Call(self, args, glTexCoord4dv);
+  return WrapFunc1<ConstArrayN<Double, 4> >::Call(self, args, glTexCoord4dv);
 }
 
 static PyObject* py_glNormal3b(PyObject *self, PyObject *args) {
@@ -232,19 +232,19 @@ static PyObject* py_glNormal3d(PyObject *self, PyObject *args) {
   return WrapFunc3<Double, Double, Double>::Call(self, args, glNormal3d);
 }
 static PyObject* py_glNormal3bv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Byte> >::Call(self, args, glNormal3bv);
+  return WrapFunc1<ConstArrayN<Byte, 3> >::Call(self, args, glNormal3bv);
 }
 static PyObject* py_glNormal3sv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Short> >::Call(self, args, glNormal3sv);
+  return WrapFunc1<ConstArrayN<Short, 3> >::Call(self, args, glNormal3sv);
 }
 static PyObject* py_glNormal3iv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Int> >::Call(self, args, glNormal3iv);
+  return WrapFunc1<ConstArrayN<Int, 3> >::Call(self, args, glNormal3iv);
 }
 static PyObject* py_glNormal3fv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Float> >::Call(self, args, glNormal3fv);
+  return WrapFunc1<ConstArrayN<Float, 3> >::Call(self, args, glNormal3fv);
 }
 static PyObject* py_glNormal3dv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Double> >::Call(self, args, glNormal3dv);
+  return WrapFunc1<ConstArrayN<Double, 3> >::Call(self, args, glNormal3dv);
 }
 
 static PyObject* py_glColor3b(PyObject *self, PyObject *args) {
@@ -272,28 +272,28 @@ static PyObject* py_glColor3d(PyObject *self, PyObject *args) {
   return WrapFunc3<Double, Double, Double>::Call(self, args, glColor3d);
 }
 static PyObject* py_glColor3bv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Byte> >::Call(self, args, glColor3bv);
+  return WrapFunc1<ConstArrayN<Byte, 3> >::Call(self, args, glColor3bv);
 }
 static PyObject* py_glColor3ubv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Ubyte> >::Call(self, args, glColor3ubv);
+  return WrapFunc1<ConstArrayN<Ubyte, 3> >::Call(self, args, glColor3ubv);
 }
 static PyObject* py_glColor3sv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Short> >::Call(self, args, glColor3sv);
+  return WrapFunc1<ConstArrayN<Short, 3> >::Call(self, args, glColor3sv);
 }
 static PyObject* py_glColor3usv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Ushort> >::Call(self, args, glColor3usv);
+  return WrapFunc1<ConstArrayN<Ushort, 3> >::Call(self, args, glColor3usv);
 }
 static PyObject* py_glColor3iv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Int> >::Call(self, args, glColor3iv);
+  return WrapFunc1<ConstArrayN<Int, 3> >::Call(self, args, glColor3iv);
 }
 static PyObject* py_glColor3uiv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Uint> >::Call(self, args, glColor3uiv);
+  return WrapFunc1<ConstArrayN<Uint, 3> >::Call(self, args, glColor3uiv);
 }
 static PyObject* py_glColor3fv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Float> >::Call(self, args, glColor3fv);
+  return WrapFunc1<ConstArrayN<Float, 3> >::Call(self, args, glColor3fv);
 }
 static PyObject* py_glColor3dv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Double> >::Call(self, args, glColor3dv);
+  return WrapFunc1<ConstArrayN<Double, 3> >::Call(self, args, glColor3dv);
 }
 static PyObject* py_glColor4b(PyObject *self, PyObject *args) {
   return WrapFunc4<Byte, Byte, Byte, Byte>::Call(self, args, glColor4b);
@@ -320,28 +320,28 @@ static PyObject* py_glColor4d(PyObject *self, PyObject *args) {
   return WrapFunc4<Double, Double, Double, Double>::Call(self, args, glColor4d);
 }
 static PyObject* py_glColor4bv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Byte> >::Call(self, args, glColor4bv);
+  return WrapFunc1<ConstArrayN<Byte, 4> >::Call(self, args, glColor4bv);
 }
 static PyObject* py_glColor4ubv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Ubyte> >::Call(self, args, glColor4ubv);
+  return WrapFunc1<ConstArrayN<Ubyte, 4> >::Call(self, args, glColor4ubv);
 }
 static PyObject* py_glColor4sv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Short> >::Call(self, args, glColor4sv);
+  return WrapFunc1<ConstArrayN<Short, 4> >::Call(self, args, glColor4sv);
 }
 static PyObject* py_glColor4usv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Ushort> >::Call(self, args, glColor4usv);
+  return WrapFunc1<ConstArrayN<Ushort, 4> >::Call(self, args, glColor4usv);
 }
 static PyObject* py_glColor4iv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Int> >::Call(self, args, glColor4iv);
+  return WrapFunc1<ConstArrayN<Int, 4> >::Call(self, args, glColor4iv);
 }
 static PyObject* py_glColor4uiv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Uint> >::Call(self, args, glColor4uiv);
+  return WrapFunc1<ConstArrayN<Uint, 4> >::Call(self, args, glColor4uiv);
 }
 static PyObject* py_glColor4fv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Float> >::Call(self, args, glColor4fv);
+  return WrapFunc1<ConstArrayN<Float, 4> >::Call(self, args, glColor4fv);
 }
 static PyObject* py_glColor4dv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Double> >::Call(self, args, glColor4dv);
+  return WrapFunc1<ConstArrayN<Double, 4> >::Call(self, args, glColor4dv);
 }
 
 // no v variant, always 1 arg
@@ -422,16 +422,16 @@ static PyObject* py_glRectd(PyObject *self, PyObject *args) {
   return WrapFunc4<Double, Double, Double, Double>::Call(self, args, glRectd);
 }
 static PyObject* py_glRectsv(PyObject *self, PyObject *args) {
-  return WrapFunc2<ConstArray<Short>, ConstArray<Short> >::Call(self, args, glRectsv);
+  return WrapFunc2<ConstArrayN<Short, 2>, ConstArrayN<Short, 2> >::Call(self, args, glRectsv);
 }
 static PyObject* py_glRectiv(PyObject *self, PyObject *args) {
-  return WrapFunc2<ConstArray<Int>, ConstArray<Int> >::Call(self, args, glRectiv);
+  return WrapFunc2<ConstArrayN<Int, 2>, ConstArrayN<Int, 2> >::Call(self, args, glRectiv);
 }
 static PyObject* py_glRectfv(PyObject *self, PyObject *args) {
-  return WrapFunc2<ConstArray<Float>, ConstArray<Float> >::Call(self, args, glRectfv);
+  return WrapFunc2<ConstArrayN<Float, 2>, ConstArrayN<Float, 2> >::Call(self, args, glRectfv);
 }
 static PyObject* py_glRectdv(PyObject *self, PyObject *args) {
-  return WrapFunc2<ConstArray<Double>, ConstArray<Double> >::Call(self, args, glRectdv);
+  return WrapFunc2<ConstArrayN<Double, 2>, ConstArrayN<Double, 2> >::Call(self, args, glRectdv);
 }
 
 static PyObject* py_glDepthRange(PyObject *self, PyObject *args) {
@@ -446,42 +446,18 @@ static PyObject* py_glMatrixMode(PyObject *self, PyObject *args) {
   return WrapFunc1<Enum>::Call(self, args, glMatrixMode);
 }
 
-static PyObject* py_glLoadMatrixf(PyObject *, PyObject *args) {
-  CHECK_ARG_COUNT(args, 1);
-  Array1D<Float> m(PyTuple_GetItem(args, 0));
-  if (m.size() != 16) {
-    PyErr_SetString(PyExc_RuntimeError, "gl.LoadMatrixf: Invalid matrix data");
-  }
-  glLoadMatrixf(m);
-  Py_RETURN_NONE;
+static PyObject* py_glLoadMatrixf(PyObject *self, PyObject *args) {
+  return WrapFunc1<ConstArrayN<Float, 16> >::Call(self, args, glLoadMatrixf);
 }
-static PyObject* py_glLoadMatrixd(PyObject *, PyObject *args) {
-  CHECK_ARG_COUNT(args, 1);
-  Array1D<Double> m(PyTuple_GetItem(args, 0));
-  if (m.size() != 16) {
-    PyErr_SetString(PyExc_RuntimeError, "gl.LoadMatrixd: Invalid matrix data");
-  }
-  glLoadMatrixd(m);
-  Py_RETURN_NONE;
+static PyObject* py_glLoadMatrixd(PyObject *self, PyObject *args) {
+  return WrapFunc1<ConstArrayN<Double, 16> >::Call(self, args, glLoadMatrixd);
 }
 
-static PyObject* py_glMultMatrixf(PyObject *, PyObject *args) {
-  CHECK_ARG_COUNT(args, 1);
-  Array1D<Float> m(PyTuple_GetItem(args, 0));
-  if (m.size() != 16) {
-    PyErr_SetString(PyExc_RuntimeError, "gl.MultMatrixf: Invalid matrix data");
-  }
-  glMultMatrixf(m);
-  Py_RETURN_NONE;
+static PyObject* py_glMultMatrixf(PyObject *self, PyObject *args) {
+  return WrapFunc1<ConstArrayN<Float, 16> >::Call(self, args, glMultMatrixf);
 }
-static PyObject* py_glMultMatrixd(PyObject *, PyObject *args) {
-  CHECK_ARG_COUNT(args, 1);
-  Array1D<Double> m(PyTuple_GetItem(args, 0));
-  if (m.size() != 16) {
-    PyErr_SetString(PyExc_RuntimeError, "gl.MultMatrixd: Invalid matrix data");
-  }
-  glMultMatrixd(m);
-  Py_RETURN_NONE;
+static PyObject* py_glMultMatrixd(PyObject *self, PyObject *args) {
+  return WrapFunc1<ConstArrayN<Double, 16> >::Call(self, args, glMultMatrixd);
 }
 
 static PyObject* py_glLoadIdentity(PyObject *self, PyObject *args) {
@@ -545,7 +521,7 @@ static PyObject* py_glTexGendv(PyObject *self, PyObject *args) {
 }
 
 static PyObject* py_glClipPlane(PyObject *self, PyObject *args) {
-  return WrapFunc2<Enum, ConstArray<Double> >::Call(self, args, glClipPlane);
+  return WrapFunc2<Enum, ConstArrayN<Double, 4> >::Call(self, args, glClipPlane);
 }
 
 static PyObject* py_glRasterPos2s(PyObject *self, PyObject *args) {
@@ -561,16 +537,16 @@ static PyObject* py_glRasterPos2d(PyObject *self, PyObject *args) {
   return WrapFunc2<Double, Double>::Call(self, args, glRasterPos2d);
 }
 static PyObject* py_glRasterPos2sv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Short> >::Call(self, args, glRasterPos2sv);
+  return WrapFunc1<ConstArrayN<Short, 2> >::Call(self, args, glRasterPos2sv);
 }
 static PyObject* py_glRasterPos2iv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Int> >::Call(self, args, glRasterPos2iv);
+  return WrapFunc1<ConstArrayN<Int, 2> >::Call(self, args, glRasterPos2iv);
 }
 static PyObject* py_glRasterPos2fv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Float> >::Call(self, args, glRasterPos2fv);
+  return WrapFunc1<ConstArrayN<Float, 2> >::Call(self, args, glRasterPos2fv);
 }
 static PyObject* py_glRasterPos2dv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Double> >::Call(self, args, glRasterPos2dv);
+  return WrapFunc1<ConstArrayN<Double, 2> >::Call(self, args, glRasterPos2dv);
 }
 static PyObject* py_glRasterPos3s(PyObject *self, PyObject *args) {
   return WrapFunc3<Short, Short, Short>::Call(self, args, glRasterPos3s);
@@ -585,16 +561,16 @@ static PyObject* py_glRasterPos3d(PyObject *self, PyObject *args) {
   return WrapFunc3<Double, Double, Double>::Call(self, args, glRasterPos3d);
 }
 static PyObject* py_glRasterPos3sv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Short> >::Call(self, args, glRasterPos3sv);
+  return WrapFunc1<ConstArrayN<Short, 3> >::Call(self, args, glRasterPos3sv);
 }
 static PyObject* py_glRasterPos3iv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Int> >::Call(self, args, glRasterPos3iv);
+  return WrapFunc1<ConstArrayN<Int, 3> >::Call(self, args, glRasterPos3iv);
 }
 static PyObject* py_glRasterPos3fv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Float> >::Call(self, args, glRasterPos3fv);
+  return WrapFunc1<ConstArrayN<Float, 3> >::Call(self, args, glRasterPos3fv);
 }
 static PyObject* py_glRasterPos3dv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Double> >::Call(self, args, glRasterPos3dv);
+  return WrapFunc1<ConstArrayN<Double, 3> >::Call(self, args, glRasterPos3dv);
 }
 static PyObject* py_glRasterPos4s(PyObject *self, PyObject *args) {
   return WrapFunc4<Short, Short, Short, Short>::Call(self, args, glRasterPos4s);
@@ -609,16 +585,16 @@ static PyObject* py_glRasterPos4d(PyObject *self, PyObject *args) {
   return WrapFunc4<Double, Double, Double, Double>::Call(self, args, glRasterPos4d);
 }
 static PyObject* py_glRasterPos4sv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Short> >::Call(self, args, glRasterPos4sv);
+  return WrapFunc1<ConstArrayN<Short, 4> >::Call(self, args, glRasterPos4sv);
 }
 static PyObject* py_glRasterPos4iv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Int> >::Call(self, args, glRasterPos4iv);
+  return WrapFunc1<ConstArrayN<Int, 4> >::Call(self, args, glRasterPos4iv);
 }
 static PyObject* py_glRasterPos4fv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Float> >::Call(self, args, glRasterPos4fv);
+  return WrapFunc1<ConstArrayN<Float, 4> >::Call(self, args, glRasterPos4fv);
 }
 static PyObject* py_glRasterPos4dv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Double> >::Call(self, args, glRasterPos4dv);
+  return WrapFunc1<ConstArrayN<Double, 4> >::Call(self, args, glRasterPos4dv);
 }
 
 static PyObject* py_glFrontFace(PyObject *self, PyObject *args) {
@@ -801,28 +777,37 @@ static PyObject* py_glGenTextures(PyObject *, PyObject *args) {
 
 static PyObject* py_glDeleteTextures(PyObject *, PyObject *args) {
   CHECK_ARG_COUNT(args, 1);
-  Array1D<Uint> textures(PyTuple_GetItem(args, 0));
-  glDeleteTextures(textures.size(), textures);
+  Array1D<Uint> textures;
+  if (textures.fromPy(PyTuple_GetItem(args, 0))) {
+    glDeleteTextures(textures.size(), textures);
+  }
   Py_RETURN_NONE;
 }
 
 static PyObject* py_glAreTexturesResident(PyObject *, PyObject *args) {
   CHECK_ARG_COUNT(args, 1);
-  Array1D<Uint> textures(PyTuple_GetItem(args, 0));
-  Array1D<Boolean> residences(textures.size());
-  glAreTexturesResident(textures.size(), textures, residences);
-  return residences.toPy();
+  Array1D<Uint> textures;
+  if (textures.fromPy(PyTuple_GetItem(args, 0)) && textures.size() > 0) {
+    Array1D<Boolean> residences(textures.size());
+    glAreTexturesResident(textures.size(), textures, residences);
+    return residences.toPy();
+  } else {
+    return PyList_New(0);
+  }
 }
 
 static PyObject* py_glPrioritizeTextures(PyObject *, PyObject *args) {
   CHECK_ARG_COUNT(args, 2);
-  Array1D<Uint> textures(PyTuple_GetItem(args, 0));
-  Array1D<Clampf> priorities(PyTuple_GetItem(args, 1));
-  if (priorities.size() != textures.size()) {
-    PyErr_SetString(PyExc_RuntimeError, "gl.PrioritizeTextures: arrays length mismatch");
-    return NULL;
+  Array1D<Uint> textures;
+  Array1D<Clampf> priorities;
+  if (textures.fromPy(PyTuple_GetItem(args, 0)) &&
+      priorities.fromPy(PyTuple_GetItem(args, 1))) {
+    if (priorities.size() != textures.size()) {
+      PyErr_SetString(PyExc_RuntimeError, "gl.PrioritizeTextures: arrays length mismatch");
+      return NULL;
+    }
+    glPrioritizeTextures(textures.size(), textures, priorities);
   }
-  glPrioritizeTextures(textures.size(), textures, priorities);
   Py_RETURN_NONE;
 }
 
@@ -967,10 +952,10 @@ static PyObject* py_glEvalCoord2d(PyObject *self, PyObject *args) {
   return WrapFunc2<Double, Double>::Call(self, args, glEvalCoord2d);
 }
 static PyObject* py_glEvalCoord2fv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Float> >::Call(self, args, glEvalCoord2fv);
+  return WrapFunc1<ConstArrayN<Float, 2> >::Call(self, args, glEvalCoord2fv);
 }
 static PyObject* py_glEvalCoord2dv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Double> >::Call(self, args, glEvalCoord2dv);
+  return WrapFunc1<ConstArrayN<Double, 2> >::Call(self, args, glEvalCoord2dv);
 }
 
 static PyObject* py_glMapGrid1f(PyObject *self, PyObject *args) {

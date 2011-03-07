@@ -26,12 +26,6 @@ USA.
 
 #include "common.h"
 
-enum
-{
-  COLUMN_MAJOR = 0,
-  ROW_MAJOR,
-};
-
 extern int CheckArraySize(PyObject *arg);
 
 template <typename U>
@@ -44,12 +38,6 @@ class Array1D
     Array1D()
       : mData(0), mSize(0), mOwns(true)
     {
-    }
-    
-    Array1D(PyObject *obj)
-      : mData(0), mSize(0), mOwns(true)
-    {
-      fromPy(obj);
     }
     
     Array1D(T *data, int sz)
@@ -133,22 +121,27 @@ class Array1D
       return l;
     }
  
-    const T* fromPy(PyObject *o)
+    bool fromPy(PyObject *o)
     {
-      if (mData && mOwns)
+      int sz = CheckArraySize(o);
+      
+      if (mData)
       {
-        delete[] mData;
+        if (mSize != sz)
+        {
+          PyErr_SetString(PyExc_RuntimeError, "Array size mismatch");
+          return false;
+        }
       }
-      
-      mData = 0;
-      mSize = 0;
-      mOwns = true;
-      
-      mSize = CheckArraySize(o);
+      else
+      {
+        mSize = sz;
+        mOwns = true;
+        mData = new T[sz];
+      }
       
       if (mSize > 0)
       {
-        mData = new T[mSize];
         for (int i=0; i<mSize; ++i)
         {
           PyObject *item = PySequence_GetItem(o, i);
@@ -158,7 +151,7 @@ class Array1D
         }
       }
       
-      return mData;
+      return true;
     }
   
   protected:
@@ -167,278 +160,5 @@ class Array1D
     int mSize;
     mutable bool mOwns;
 };
-
-
-template <typename U>
-class FlatArray2D
-{
-  public:
-    
-    typedef typename U::T T;
-    
-    FlatArray2D()
-      : mData(0), mRowSize(0), mColSize(0), mOwns(true)
-    {
-    }
-    
-    FlatArray2D(int nr, int nc)
-      : mRowSize(nr), mColSize(nc), mOwns(true)
-    {
-      mData = new T[nr * nc];
-    }
-    
-    FlatArray2D(T *data, int nr, int nc)
-      : mData(data), mRowSize(nr), mColSize(nc), mOwns(false)
-    {
-    }
-    
-    FlatArray2D(PyObject *obj, int pyformat, int dstformat)
-      : mData(0), mRowSize(0), mColSize(0), mOwns(true)
-    {
-      fromPy(obj, pyformat, dstformat);
-    }
-    
-    FlatArray2D(const FlatArray2D<U> &rhs)
-      : mData(rhs.mData), mRowSize(rhs.mRowSize), mColSize(rhs.mColSize),
-        mOwns(rhs.mOwns)
-    {
-      rhs.mOwns = false;
-    }
-    
-    ~FlatArray2D()
-    {
-      if (mData && mOwns)
-      {
-        delete[] mData;
-      }
-    }
-    
-    FlatArray2D<U>& operator=(const FlatArray2D<U> &rhs)
-    {
-      if (this != &rhs)
-      {
-        if (mData && mOwns)
-        {
-          delete[] mData;
-        }
-        mData = rhs.mData;
-        mRowSize = rhs.mRowSize;
-        mColSize = rhs.mColSize;
-        mOwns = rhs.mOwns;
-        rhs.mOwns = false;
-      }
-      return *this;
-    }
-    
-    inline operator T* ()
-    {
-      return mData;
-    }
-    
-    inline operator const T* () const
-    {
-      return mData;
-    }
-    
-    inline operator void* ()
-    {
-      return (void*)mData;
-    }
-    
-    inline operator const void*() const
-    {
-      return (const void*)mData;
-    }
-    
-    inline int numRows() const
-    {
-      return mRowSize;
-    }
-    
-    inline int numColumns() const
-    {
-      return mColSize;
-    }
-
-    inline int size() const
-    {
-      return (mRowSize * mColSize);
-    }
-    
-    PyObject* toPy(int srcformat, int pyformat)
-    {
-      
-      if (!mData)
-      {
-        Py_RETURN_NONE;
-      }
-      
-      int mRowStride, mColStride;
-        
-      if (srcformat == COLUMN_MAJOR)
-      {
-        mRowStride = 1;
-        mColStride = mColSize;
-      }
-      else
-      {
-        mColStride = 1;
-        mRowStride = mRowSize;
-      }
-      
-      if (pyformat == ROW_MAJOR)
-      {
-        PyObject *rows = PyList_New(mRowSize);
-        for (int r=0; r<mRowSize; ++r)
-        {
-          int idx = r * mRowStride;
-          PyObject *row = PyList_New(mColSize);
-          for (int c=0; c<mColSize; ++c, idx+=mColStride)
-          {
-            U v(mData[idx]);
-            PyList_SetItem(row, c, v.toPy());
-          }
-          PyList_SetItem(rows, r, row);
-        }
-        return rows; 
-      }
-      else
-      {
-        PyObject *cols = PyList_New(mColSize);
-        for (int c=0; c<mColSize; ++c)
-        {
-          int idx = c * mColStride;
-          PyObject *col = PyList_New(mRowSize);
-          for (int r=0; r<mRowSize; ++r, idx+=mRowStride)
-          {
-            U v(mData[idx]);
-            PyList_SetItem(col, r, v.toPy());
-          }
-          PyList_SetItem(cols, c, col);
-        }
-        return cols;
-      }
-    }
-    
-    const T* fromPy(PyObject *obj, int pyformat, int dstformat)
-    {
-      if (mData && mOwns)
-      {
-        delete[] mData;
-      }
-      
-      mRowSize = 0;
-      mColSize = 0;
-      mOwns = true;
-      
-      if (pyformat == ROW_MAJOR)
-      {
-        mRowSize = CheckArraySize(obj);
-        int cs = -1;
-        for (int i=0; i<mRowSize; ++i)
-        {
-          PyObject *col = PySequence_GetItem(obj, i);
-          if (cs == -1)
-          {
-            cs = CheckArraySize(col);
-          }
-          else if (cs != CheckArraySize(col))
-          {
-            Py_DECREF(col);
-            PyErr_SetString(PyExc_RuntimeError, "All columns must have the same dimension");
-            return 0;
-          }
-          Py_DECREF(col);
-        }
-        mColSize = cs;
-        
-      }
-      else
-      {
-        mColSize = CheckArraySize(obj);
-        int rs = -1;
-        for (int i=0; i<mColSize; ++i)
-        {
-          PyObject *row = PySequence_GetItem(obj, i);
-          if (rs == -1)
-          {
-            rs = CheckArraySize(row);
-          }
-          else if (rs != CheckArraySize(row))
-          {
-            Py_DECREF(row);
-            PyErr_SetString(PyExc_RuntimeError, "All rows must have the same dimension");
-            return 0;
-          }
-          Py_DECREF(row);
-        }
-        mRowSize = rs;
-      }
-      
-      if (mRowSize > 0 && mColSize > 0)
-      {
-        
-        int mRowStride, mColStride;
-        
-        if (dstformat == COLUMN_MAJOR)
-        {
-          mRowStride = 1;
-          mColStride = mColSize;
-        }
-        else
-        {
-          mColStride = 1;
-          mRowStride = mRowSize;
-        }
-        
-        mData = new T[mRowSize * mColSize];
-        
-        if (pyformat == COLUMN_MAJOR)
-        {
-          for (int c=0; c<mColSize; ++c)
-          {
-            int idx = c * mColStride;
-            PyObject *col = PySequence_GetItem(obj, c);
-            for (int r=0; r<mRowSize; ++r, idx+=mRowStride)
-            {
-              PyObject *pv = PySequence_GetItem(col, r);
-              U v(pv);
-              mData[idx] = T(v);
-              Py_DECREF(pv);
-            }
-            Py_DECREF(col);
-          }
-          
-        }
-        else
-        {
-          for (int r=0; r<mRowSize; ++r)
-          {
-            int idx = r * mRowStride;
-            PyObject *row = PySequence_GetItem(obj, r);
-            for (int c=0; c<mColSize; ++c, idx+=mColStride)
-            {
-              PyObject *pv = PySequence_GetItem(row, c);
-              U v(pv);
-              mData[idx] = T(v);
-              Py_DECREF(pv);
-            }
-            Py_DECREF(row);
-          }
-        }
-      }
-      
-      return mData;
-    }
-    
-  protected:
-    
-    T *mData;
-    int mRowSize;
-    int mColSize;
-    mutable bool mOwns;
-    
-};
-
 
 #endif

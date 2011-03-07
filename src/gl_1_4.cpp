@@ -73,49 +73,49 @@ static PyObject* py_glSecondaryColor3b(PyObject *self, PyObject *args) {
   return WrapFunc3<Byte, Byte, Byte >::Call(self, args, glSecondaryColor3b);
 }
 static PyObject* py_glSecondaryColor3bv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Byte> >::Call(self, args, glSecondaryColor3bv);
+  return WrapFunc1<ConstArrayN<Byte, 3> >::Call(self, args, glSecondaryColor3bv);
 }
 static PyObject* py_glSecondaryColor3d(PyObject *self, PyObject *args) {
   return WrapFunc3<Double, Double, Double >::Call(self, args, glSecondaryColor3d);
 }
 static PyObject* py_glSecondaryColor3dv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Double> >::Call(self, args, glSecondaryColor3dv);
+  return WrapFunc1<ConstArrayN<Double, 3> >::Call(self, args, glSecondaryColor3dv);
 }
 static PyObject* py_glSecondaryColor3f(PyObject *self, PyObject *args) {
   return WrapFunc3<Float, Float, Float >::Call(self, args, glSecondaryColor3f);
 }
 static PyObject* py_glSecondaryColor3fv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Float> >::Call(self, args, glSecondaryColor3fv);
+  return WrapFunc1<ConstArrayN<Float, 3> >::Call(self, args, glSecondaryColor3fv);
 }
 static PyObject* py_glSecondaryColor3i(PyObject *self, PyObject *args) {
   return WrapFunc3<Int, Int, Int >::Call(self, args, glSecondaryColor3i);
 }
 static PyObject* py_glSecondaryColor3iv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Int> >::Call(self, args, glSecondaryColor3iv);
+  return WrapFunc1<ConstArrayN<Int, 3> >::Call(self, args, glSecondaryColor3iv);
 }
 static PyObject* py_glSecondaryColor3s(PyObject *self, PyObject *args) {
   return WrapFunc3<Short, Short, Short >::Call(self, args, glSecondaryColor3s);
 }
 static PyObject* py_glSecondaryColor3sv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Short> >::Call(self, args, glSecondaryColor3sv);
+  return WrapFunc1<ConstArrayN<Short, 3> >::Call(self, args, glSecondaryColor3sv);
 }
 static PyObject* py_glSecondaryColor3ub(PyObject *self, PyObject *args) {
   return WrapFunc3<Ubyte, Ubyte, Ubyte >::Call(self, args, glSecondaryColor3ub);
 }
 static PyObject* py_glSecondaryColor3ubv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Ubyte> >::Call(self, args, glSecondaryColor3ubv);
+  return WrapFunc1<ConstArrayN<Ubyte, 3> >::Call(self, args, glSecondaryColor3ubv);
 }
 static PyObject* py_glSecondaryColor3ui(PyObject *self, PyObject *args) {
   return WrapFunc3<Uint, Uint, Uint >::Call(self, args, glSecondaryColor3ui);
 }
 static PyObject* py_glSecondaryColor3uiv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Uint> >::Call(self, args, glSecondaryColor3uiv);
+  return WrapFunc1<ConstArrayN<Uint, 3> >::Call(self, args, glSecondaryColor3uiv);
 }
 static PyObject* py_glSecondaryColor3us(PyObject *self, PyObject *args) {
   return WrapFunc3<Ushort, Ushort, Ushort >::Call(self, args, glSecondaryColor3us);
 }
 static PyObject* py_glSecondaryColor3usv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Ushort> >::Call(self, args, glSecondaryColor3usv);
+  return WrapFunc1<ConstArrayN<Ushort, 3> >::Call(self, args, glSecondaryColor3usv);
 }
 
 static PyObject* py_glSecondaryColorPointer(PyObject *self, PyObject *args) {
@@ -126,49 +126,49 @@ static PyObject* py_glWindowPos2d(PyObject *self, PyObject *args) {
   return WrapFunc2<Double, Double >::Call(self, args, glWindowPos2d);
 }
 static PyObject* py_glWindowPos2dv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Double> >::Call(self, args, glWindowPos2dv);
+  return WrapFunc1<ConstArrayN<Double, 2> >::Call(self, args, glWindowPos2dv);
 }
 static PyObject* py_glWindowPos2f(PyObject *self, PyObject *args) {
   return WrapFunc2<Float, Float >::Call(self, args, glWindowPos2f);
 }
 static PyObject* py_glWindowPos2fv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Float> >::Call(self, args, glWindowPos2fv);
+  return WrapFunc1<ConstArrayN<Float, 2> >::Call(self, args, glWindowPos2fv);
 }
 static PyObject* py_glWindowPos2i(PyObject *self, PyObject *args) {
   return WrapFunc2<Int, Int >::Call(self, args, glWindowPos2i);
 }
 static PyObject* py_glWindowPos2iv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Int> >::Call(self, args, glWindowPos2iv);
+  return WrapFunc1<ConstArrayN<Int, 2> >::Call(self, args, glWindowPos2iv);
 }
 static PyObject* py_glWindowPos2s(PyObject *self, PyObject *args) {
   return WrapFunc2<Short, Short >::Call(self, args, glWindowPos2s);
 }
 static PyObject* py_glWindowPos2sv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Short> >::Call(self, args, glWindowPos2sv);
+  return WrapFunc1<ConstArrayN<Short, 2> >::Call(self, args, glWindowPos2sv);
 }
 static PyObject* py_glWindowPos3d(PyObject *self, PyObject *args) {
   return WrapFunc3<Double, Double, Double >::Call(self, args, glWindowPos3d);
 }
 static PyObject* py_glWindowPos3dv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Double> >::Call(self, args, glWindowPos3dv);
+  return WrapFunc1<ConstArrayN<Double, 3> >::Call(self, args, glWindowPos3dv);
 }
 static PyObject* py_glWindowPos3f(PyObject *self, PyObject *args) {
   return WrapFunc3<Float, Float, Float >::Call(self, args, glWindowPos3f);
 }
 static PyObject* py_glWindowPos3fv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Float> >::Call(self, args, glWindowPos3fv);
+  return WrapFunc1<ConstArrayN<Float, 3> >::Call(self, args, glWindowPos3fv);
 }
 static PyObject* py_glWindowPos3i(PyObject *self, PyObject *args) {
   return WrapFunc3<Int, Int, Int >::Call(self, args, glWindowPos3i);
 }
 static PyObject* py_glWindowPos3iv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Int> >::Call(self, args, glWindowPos3iv);
+  return WrapFunc1<ConstArrayN<Int, 3> >::Call(self, args, glWindowPos3iv);
 }
 static PyObject* py_glWindowPos3s(PyObject *self, PyObject *args) {
   return WrapFunc3<Short, Short, Short >::Call(self, args, glWindowPos3s);
 }
 static PyObject* py_glWindowPos3sv(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Short> >::Call(self, args, glWindowPos3sv);
+  return WrapFunc1<ConstArrayN<Short, 3> >::Call(self, args, glWindowPos3sv);
 }
 
 void Register_GL_1_4_Constants(PyGL::ConstantMap &constants) {

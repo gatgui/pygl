@@ -403,6 +403,44 @@ struct Array {
   Array1D<U> value;
 };
 
+template <typename U, int dim>
+struct ArrayN {
+  typedef typename U::T* T;
+  
+  inline ArrayN()
+  {
+    value = Array1D<U>(_cary, dim);
+  }
+  
+  inline ArrayN(PyObject *obj)
+  {
+    value = Array1D<U>(_cary, dim);
+    fromPy(obj);
+  }
+  
+  inline ~ArrayN()
+  {
+  }
+  
+  inline void fromPy(PyObject *obj)
+  {
+    value.fromPy(obj);
+  }
+  
+  inline PyObject* toPy()
+  {
+    return value.toPy();
+  }
+  
+  inline operator T ()
+  {
+    return value;
+  }
+  
+  Array1D<U> value;
+  typename U::T _cary[dim];
+};
+
 template <typename U>
 struct ConstArray
 {
@@ -438,5 +476,45 @@ struct ConstArray
   
   Array1D<U> value;
 };
+
+template <typename U, int dim>
+struct ConstArrayN
+{
+  typedef const typename U::T* T;
+  
+  inline ConstArrayN()
+  {
+    value = Array1D<U>(_cary, dim);
+  }
+  
+  inline ConstArrayN(PyObject *obj)
+  {
+    value = Array1D<U>(_cary, dim);
+    fromPy(obj);
+  }
+  
+  inline ~ConstArrayN()
+  {
+  }
+  
+  inline void fromPy(PyObject *obj)
+  {
+    value.fromPy(obj);
+  }
+  
+  inline PyObject* toPy()
+  {
+    return value.toPy();
+  }
+  
+  inline operator T () const
+  {
+    return value;
+  }
+  
+  Array1D<U> value;
+  typename U::T _cary[dim];
+};
+
 
 #endif

@@ -818,20 +818,9 @@ class PyGLU
       return WrapFunc4<Double, Double, Double, Double >::Call(self, args, gluPerspective);
     }
     
-    static PyObject* py_gluPickMatrix(PyObject *, PyObject *args) {
-      CHECK_ARG_COUNT(args, 5);
-      Double x(PyTuple_GetItem(args, 0));
-      Double y(PyTuple_GetItem(args, 1));
-      Double w(PyTuple_GetItem(args, 2));
-      Double h(PyTuple_GetItem(args, 3));
-      Array1D<Int> viewport(PyTuple_GetItem(args, 4));
-      if (viewport.size() != 4)
-      {
-        PyErr_SetString(PyExc_RuntimeError, "glu.PickMatrix: invalid viewport");
-        return NULL;
-      }
-      gluPickMatrix(x, y, w, h, viewport);
-      Py_RETURN_NONE;
+    static PyObject* py_gluPickMatrix(PyObject *self, PyObject *args)
+    {
+      return WrapFunc5<Double, Double, Double, Double, ArrayN<Int, 4> >::Call(self, args, gluPickMatrix);
     }
     
     static PyObject* py_gluLookAt(PyObject *self, PyObject *args)
@@ -842,28 +831,40 @@ class PyGLU
     static PyObject* py_gluProject(PyObject *, PyObject *args)
     {
       CHECK_ARG_COUNT(args, 6);
+      
+      GLdouble model[16], proj[16];
+      GLint viewport[4];
+      
+      Array1D<Double> tmp0(model, 16);
+      Array1D<Double> tmp1(proj, 16);
+      Array1D<Int> tmp2(viewport, 4);
+      
       Double ox(PyTuple_GetItem(args, 0));
       Double oy(PyTuple_GetItem(args, 1));
       Double oz(PyTuple_GetItem(args, 2));
-      FlatArray2D<Double> model(PyTuple_GetItem(args, 3), ROW_MAJOR, COLUMN_MAJOR);
-      if (model.numRows() != 4 || model.numColumns() != 4)
+      
+      if (!tmp0.fromPy(PyTuple_GetItem(args, 3)))
       {
         PyErr_SetString(PyExc_RuntimeError, "glu.Project: invalid model matrix");
         return NULL;
       }
-      FlatArray2D<Double> proj(PyTuple_GetItem(args, 4), ROW_MAJOR, COLUMN_MAJOR);
-      if (proj.numRows() != 4 || proj.numColumns() != 4)
+      
+      if (!tmp1.fromPy(PyTuple_GetItem(args, 4)))
       {
-        PyErr_SetString(PyExc_RuntimeError, "glu.Project: invalid proj matrix");
+        PyErr_SetString(PyExc_RuntimeError, "glu.Project: invalid projection matrix");
         return NULL;
       }
-      Array1D<Int> viewport(PyTuple_GetItem(args, 5));
-      if (viewport.size() != 4)
+      
+      if (!tmp2.fromPy(PyTuple_GetItem(args, 5)))
       {
         PyErr_SetString(PyExc_RuntimeError, "glu.Project: invalid viewport");
+        return NULL;
       }
+      
       GLdouble w[3];
+      
       int r = gluProject(ox, oy, oz, model, proj, viewport, &w[0], &w[1], &w[2]);
+      
       if (r != GL_TRUE)
       {
         Py_RETURN_NONE;
@@ -877,29 +878,41 @@ class PyGLU
     static PyObject* py_gluUnProject(PyObject *, PyObject *args)
     {
       CHECK_ARG_COUNT(args, 6);
+      
+      GLdouble model[16], proj[16];
+      GLint viewport[4];
+      
+      Array1D<Double> tmp0(model, 16);
+      Array1D<Double> tmp1(proj, 16);
+      Array1D<Int> tmp2(viewport, 4);
+      
       Double wx(PyTuple_GetItem(args, 0));
       Double wy(PyTuple_GetItem(args, 1));
       Double wz(PyTuple_GetItem(args, 2));
-      FlatArray2D<Double> model(PyTuple_GetItem(args, 3), ROW_MAJOR, COLUMN_MAJOR);
-      if (model.numRows() != 4 || model.numColumns() != 4)
+      
+      
+      if (!tmp0.fromPy(PyTuple_GetItem(args, 3)))
       {
         PyErr_SetString(PyExc_RuntimeError, "glu.UnProject: invalid model matrix");
         return NULL;
       }
-      FlatArray2D<Double> proj(PyTuple_GetItem(args, 4), ROW_MAJOR, COLUMN_MAJOR);
-      if (proj.numRows() != 4 || proj.numColumns() != 4)
+      
+      if (!tmp1.fromPy(PyTuple_GetItem(args, 4)))
       {
-        PyErr_SetString(PyExc_RuntimeError, "glu.UnProject: invalid proj matrix");
+        PyErr_SetString(PyExc_RuntimeError, "glu.UnProject: invalid projection matrix");
         return NULL;
       }
-      Array1D<Int> viewport(PyTuple_GetItem(args, 5));
-      if (viewport.size() != 4)
+      
+      if (!tmp2.fromPy(PyTuple_GetItem(args, 5)))
       {
         PyErr_SetString(PyExc_RuntimeError, "glu.UnProject: invalid viewport");
         return NULL;
       }
+      
       GLdouble o[3];
+      
       int r = gluUnProject(wx, wy, wz, model, proj, viewport, &o[0], &o[1], &o[2]);
+      
       if (r != GL_TRUE)
       {
         Py_RETURN_NONE;
@@ -1073,10 +1086,12 @@ class PyGLU
     
     static PyObject* py_gluTessVertex(PyObject *, PyObject *args)
     {
+      GLdouble coords[3];
+      
       CHECK_ARG_COUNT(args, 3);
       Tess t(PyTuple_GetItem(args, 0));
-      Array1D<Double> coords(PyTuple_GetItem(args, 1));
-      if (coords.size() != 3)
+      Array1D<Double> tmp(coords, 3);
+      if (!tmp.fromPy(PyTuple_GetItem(args, 1)))
       {
         PyErr_SetString(PyExc_RuntimeError, "glu.TessVertex: invalid coords");
         return NULL;
@@ -1215,25 +1230,35 @@ class PyGLU
     static PyObject* py_gluLoadSamplingMatrices(PyObject *, PyObject *args)
     {
       CHECK_ARG_COUNT(args, 4);
+      
+      GLfloat model[16];
+      GLfloat proj[16];
+      GLint viewport[4];
+      
+      Array1D<Float> tmp0(model, 16);
+      Array1D<Float> tmp1(proj, 16);
+      Array1D<Int> tmp2(viewport, 4);
+      
       Nurbs n(PyTuple_GetItem(args, 0));
-      FlatArray2D<Float> model(PyTuple_GetItem(args, 1), ROW_MAJOR, COLUMN_MAJOR);
-      if (model.numRows() != 4 || model.numColumns() != 4)
+      
+      if (!tmp0.fromPy(PyTuple_GetItem(args, 1)))
       {
         PyErr_SetString(PyExc_RuntimeError, "glu.LoadSamplingMatrices: invalid modelview matrix");
         return NULL;
       }
-      FlatArray2D<Float> proj(PyTuple_GetItem(args, 2), ROW_MAJOR, COLUMN_MAJOR);
-      if (proj.numRows() != 4 || proj.numColumns() != 4)
+      
+      if (!tmp1.fromPy(PyTuple_GetItem(args, 2)))
       {
         PyErr_SetString(PyExc_RuntimeError, "glu.LoadSamplingMatrices: invalid projection matrix");
         return NULL;
       }
-      Array1D<Int> viewport(PyTuple_GetItem(args, 3));
-      if (viewport.size() != 4)
+      
+      if (!tmp2.fromPy(PyTuple_GetItem(args, 3)))
       {
         PyErr_SetString(PyExc_RuntimeError, "glu.LoadSamplingMatrices: invalid viewport");
         return NULL;
       }
+      
       gluLoadSamplingMatrices(n, model, proj, viewport);
       Py_RETURN_NONE;
     }

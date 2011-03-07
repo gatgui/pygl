@@ -43,15 +43,19 @@ static PyObject* py_glBufferSubData(PyObject *self, PyObject *args) {
 
 static PyObject* py_glDeleteBuffers(PyObject *, PyObject *args) {
   CHECK_ARG_COUNT(args, 1);
-  Array1D<Uint> buffers(PyTuple_GetItem(args, 0));
-  glDeleteBuffers(buffers.size(), buffers);
+  Array1D<Uint> buffers;
+  if (buffers.fromPy(PyTuple_GetItem(args, 0))) {
+    glDeleteBuffers(buffers.size(), buffers);
+  }
   Py_RETURN_NONE;
 }
 
 static PyObject* py_glDeleteQueries(PyObject *, PyObject *args) {
   CHECK_ARG_COUNT(args, 1);
-  Array1D<Uint> queries(PyTuple_GetItem(args, 0));
-  glDeleteQueries(queries.size(), queries);
+  Array1D<Uint> queries;
+  if (queries.fromPy(PyTuple_GetItem(args, 0))) {
+    glDeleteQueries(queries.size(), queries);
+  }
   Py_RETURN_NONE;
 }
 

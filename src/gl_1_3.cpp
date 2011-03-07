@@ -61,46 +61,18 @@ static PyObject* py_glGetCompressedTexImage(PyObject *self, PyObject *args) {
   return WrapFunc3<Enum, Int, Ptr >::Call(self, args, glGetCompressedTexImage);
 }
 
-static PyObject* py_glLoadTransposeMatrixf(PyObject *, PyObject *args) {
-  CHECK_ARG_COUNT(args, 1);
-  Array1D<Float> m(PyTuple_GetItem(args, 0));
-  if (m.size() != 16) {
-    PyErr_SetString(PyExc_RuntimeError, "gl.LoadTransposeMatrixf: invalid matrix data");
-    return NULL;
-  }
-  glLoadTransposeMatrixf(m);
-  Py_RETURN_NONE;
+static PyObject* py_glLoadTransposeMatrixf(PyObject *self, PyObject *args) {
+  return WrapFunc1<ConstArrayN<Float, 16> >::Call(self, args, glLoadTransposeMatrixf);
 }
-static PyObject* py_glLoadTransposeMatrixd(PyObject *, PyObject *args) {
-  CHECK_ARG_COUNT(args, 1);
-  Array1D<Double> m(PyTuple_GetItem(args, 0));
-  if (m.size() != 16) {
-    PyErr_SetString(PyExc_RuntimeError, "gl.LoadTransposeMatrixd: invalid matrix data");
-    return NULL;
-  }
-  glLoadTransposeMatrixd(m);
-  Py_RETURN_NONE;
+static PyObject* py_glLoadTransposeMatrixd(PyObject *self, PyObject *args) {
+  return WrapFunc1<ConstArrayN<Double, 16> >::Call(self, args, glLoadTransposeMatrixd);
 }
 
-static PyObject* py_glMultTransposeMatrixf(PyObject *, PyObject *args) {
-  CHECK_ARG_COUNT(args, 1);
-  Array1D<Float> m(PyTuple_GetItem(args, 0));
-  if (m.size() != 16) {
-    PyErr_SetString(PyExc_RuntimeError, "gl.MultTransposeMatrixf: invalid matrix data");
-    return NULL;
-  }
-  glMultTransposeMatrixf(m);
-  Py_RETURN_NONE;
+static PyObject* py_glMultTransposeMatrixf(PyObject *self, PyObject *args) {
+  return WrapFunc1<ConstArrayN<Float, 16> >::Call(self, args, glMultTransposeMatrixf);
 }
-static PyObject* py_glMultTransposeMatrixd(PyObject *, PyObject *args) {
-  CHECK_ARG_COUNT(args, 1);
-  Array1D<Double> m(PyTuple_GetItem(args, 0));
-  if (m.size() != 16) {
-    PyErr_SetString(PyExc_RuntimeError, "gl.MultTransposeMatrixd: invalid matrix data");
-    return NULL;
-  }
-  glMultTransposeMatrixd(m);
-  Py_RETURN_NONE;
+static PyObject* py_glMultTransposeMatrixd(PyObject *self, PyObject *args) {
+  return WrapFunc1<ConstArrayN<Double, 16> >::Call(self, args, glMultTransposeMatrixd);
 }
 
 static PyObject* py_glMultiTexCoord1s(PyObject *self, PyObject *args) {
@@ -129,16 +101,16 @@ static PyObject* py_glMultiTexCoord2d(PyObject *self, PyObject *args) {
   return WrapFunc3<Enum, Double, Double >::Call(self, args, glMultiTexCoord2d);
 }
 static PyObject* py_glMultiTexCoord2sv(PyObject *self, PyObject *args) {
-  return WrapFunc2<Enum, ConstArray<Short> >::Call(self, args, glMultiTexCoord2sv);
+  return WrapFunc2<Enum, ConstArrayN<Short, 2> >::Call(self, args, glMultiTexCoord2sv);
 }
 static PyObject* py_glMultiTexCoord2iv(PyObject *self, PyObject *args) {
-  return WrapFunc2<Enum, ConstArray<Int> >::Call(self, args, glMultiTexCoord2iv);
+  return WrapFunc2<Enum, ConstArrayN<Int, 2> >::Call(self, args, glMultiTexCoord2iv);
 }
 static PyObject* py_glMultiTexCoord2fv(PyObject *self, PyObject *args) {
-  return WrapFunc2<Enum, ConstArray<Float> >::Call(self, args, glMultiTexCoord2fv);
+  return WrapFunc2<Enum, ConstArrayN<Float, 2> >::Call(self, args, glMultiTexCoord2fv);
 }
 static PyObject* py_glMultiTexCoord2dv(PyObject *self, PyObject *args) {
-  return WrapFunc2<Enum, ConstArray<Double> >::Call(self, args, glMultiTexCoord2dv);
+  return WrapFunc2<Enum, ConstArrayN<Double, 2> >::Call(self, args, glMultiTexCoord2dv);
 }
 
 static PyObject* py_glMultiTexCoord3s(PyObject *self, PyObject *args) {
@@ -154,16 +126,16 @@ static PyObject* py_glMultiTexCoord3d(PyObject *self, PyObject *args) {
   return WrapFunc4<Enum, Double, Double, Double >::Call(self, args, glMultiTexCoord3d);
 }
 static PyObject* py_glMultiTexCoord3sv(PyObject *self, PyObject *args) {
-  return WrapFunc2<Enum, ConstArray<Short> >::Call(self, args, glMultiTexCoord3sv);
+  return WrapFunc2<Enum, ConstArrayN<Short, 3> >::Call(self, args, glMultiTexCoord3sv);
 }
 static PyObject* py_glMultiTexCoord3iv(PyObject *self, PyObject *args) {
-  return WrapFunc2<Enum, ConstArray<Int> >::Call(self, args, glMultiTexCoord3iv);
+  return WrapFunc2<Enum, ConstArrayN<Int, 3> >::Call(self, args, glMultiTexCoord3iv);
 }
 static PyObject* py_glMultiTexCoord3fv(PyObject *self, PyObject *args) {
-  return WrapFunc2<Enum, ConstArray<Float> >::Call(self, args, glMultiTexCoord3fv);
+  return WrapFunc2<Enum, ConstArrayN<Float, 3> >::Call(self, args, glMultiTexCoord3fv);
 }
 static PyObject* py_glMultiTexCoord3dv(PyObject *self, PyObject *args) {
-  return WrapFunc2<Enum, ConstArray<Double> >::Call(self, args, glMultiTexCoord3dv);
+  return WrapFunc2<Enum, ConstArrayN<Double, 3> >::Call(self, args, glMultiTexCoord3dv);
 }
 
 static PyObject* py_glMultiTexCoord4s(PyObject *self, PyObject *args) {
@@ -179,16 +151,16 @@ static PyObject* py_glMultiTexCoord4d(PyObject *self, PyObject *args) {
   return WrapFunc5<Enum, Double, Double, Double, Double >::Call(self, args, glMultiTexCoord4d);
 }
 static PyObject* py_glMultiTexCoord4sv(PyObject *self, PyObject *args) {
-  return WrapFunc2<Enum, ConstArray<Short> >::Call(self, args, glMultiTexCoord4sv);
+  return WrapFunc2<Enum, ConstArrayN<Short, 4> >::Call(self, args, glMultiTexCoord4sv);
 }
 static PyObject* py_glMultiTexCoord4iv(PyObject *self, PyObject *args) {
-  return WrapFunc2<Enum, ConstArray<Int> >::Call(self, args, glMultiTexCoord4iv);
+  return WrapFunc2<Enum, ConstArrayN<Int, 4> >::Call(self, args, glMultiTexCoord4iv);
 }
 static PyObject* py_glMultiTexCoord4fv(PyObject *self, PyObject *args) {
-  return WrapFunc2<Enum, ConstArray<Float> >::Call(self, args, glMultiTexCoord4fv);
+  return WrapFunc2<Enum, ConstArrayN<Float, 4> >::Call(self, args, glMultiTexCoord4fv);
 }
 static PyObject* py_glMultiTexCoord4dv(PyObject *self, PyObject *args) {
-  return WrapFunc2<Enum, ConstArray<Double> >::Call(self, args, glMultiTexCoord4dv);
+  return WrapFunc2<Enum, ConstArrayN<Double, 4> >::Call(self, args, glMultiTexCoord4dv);
 }
 
 static PyObject* py_glSampleCoverage(PyObject *self, PyObject *args) {

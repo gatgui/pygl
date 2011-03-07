@@ -70,8 +70,10 @@ static PyObject* py_glDisableVertexAttribArray(PyObject *self, PyObject *args) {
 
 static PyObject* py_glDrawBuffers(PyObject *, PyObject *args) {
   CHECK_ARG_COUNT(args, 1);
-  Array1D<Enum> buffers(PyTuple_GetItem(args, 0));
-  glDrawBuffers(buffers.size(), buffers);
+  Array1D<Enum> buffers;
+  if (buffers.fromPy(PyTuple_GetItem(args, 0))) {
+    glDrawBuffers(buffers.size(), buffers);
+  }
   Py_RETURN_NONE;
 }
 
@@ -383,8 +385,10 @@ static PyObject* py_glGetVertexAttrib(PyObject *, PyObject *args) {
 static PyObject* py_glShaderSource(PyObject *, PyObject *args) {
   CHECK_ARG_COUNT(args, 2);
   Uint shader(PyTuple_GetItem(args, 0));
-  Array1D<String> strings(PyTuple_GetItem(args, 1));
-  glShaderSource(shader, strings.size(), strings, 0);
+  Array1D<String> strings;
+  if (strings.fromPy(PyTuple_GetItem(args, 1))) {
+    glShaderSource(shader, strings.size(), strings, 0);
+  }
   Py_RETURN_NONE;
 }
 
@@ -487,13 +491,13 @@ static PyObject* py_glVertexAttrib2s(PyObject *self, PyObject *args) {
   return WrapFunc3<Uint, Short, Short >::Call(self, args, glVertexAttrib2s);
 }
 static PyObject* py_glVertexAttrib2dv(PyObject *self, PyObject *args) {
-  return WrapFunc2<Uint, ConstArray<Double> >::Call(self, args, glVertexAttrib2dv);
+  return WrapFunc2<Uint, ConstArrayN<Double, 2> >::Call(self, args, glVertexAttrib2dv);
 }
 static PyObject* py_glVertexAttrib2fv(PyObject *self, PyObject *args) {
-  return WrapFunc2<Uint, ConstArray<Float> >::Call(self, args, glVertexAttrib2fv);
+  return WrapFunc2<Uint, ConstArrayN<Float, 2> >::Call(self, args, glVertexAttrib2fv);
 }
 static PyObject* py_glVertexAttrib2sv(PyObject *self, PyObject *args) {
-  return WrapFunc2<Uint, ConstArray<Short> >::Call(self, args, glVertexAttrib2sv);
+  return WrapFunc2<Uint, ConstArrayN<Short, 2> >::Call(self, args, glVertexAttrib2sv);
 }
 
 static PyObject* py_glVertexAttrib3d(PyObject *self, PyObject *args) {
@@ -506,13 +510,13 @@ static PyObject* py_glVertexAttrib3s(PyObject *self, PyObject *args) {
   return WrapFunc4<Uint, Short, Short, Short >::Call(self, args, glVertexAttrib3s);
 }
 static PyObject* py_glVertexAttrib3dv(PyObject *self, PyObject *args) {
-  return WrapFunc2<Uint, ConstArray<Double> >::Call(self, args, glVertexAttrib3dv);
+  return WrapFunc2<Uint, ConstArrayN<Double, 3> >::Call(self, args, glVertexAttrib3dv);
 }
 static PyObject* py_glVertexAttrib3fv(PyObject *self, PyObject *args) {
-  return WrapFunc2<Uint, ConstArray<Float> >::Call(self, args, glVertexAttrib3fv);
+  return WrapFunc2<Uint, ConstArrayN<Float, 3> >::Call(self, args, glVertexAttrib3fv);
 }
 static PyObject* py_glVertexAttrib3sv(PyObject *self, PyObject *args) {
-  return WrapFunc2<Uint, ConstArray<Short> >::Call(self, args, glVertexAttrib3sv);
+  return WrapFunc2<Uint, ConstArrayN<Short, 3> >::Call(self, args, glVertexAttrib3sv);
 }
 
 static PyObject* py_glVertexAttrib4d(PyObject *self, PyObject *args) {
@@ -528,46 +532,46 @@ static PyObject* py_glVertexAttrib4Nub(PyObject *self, PyObject *args) {
   return WrapFunc5<Uint, Ubyte, Ubyte, Ubyte, Ubyte >::Call(self, args, glVertexAttrib4Nub);
 }
 static PyObject* py_glVertexAttrib4Nbv(PyObject *self, PyObject *args) {
-  return WrapFunc2<Uint, ConstArray<Byte> >::Call(self, args, glVertexAttrib4Nbv);
+  return WrapFunc2<Uint, ConstArrayN<Byte, 4> >::Call(self, args, glVertexAttrib4Nbv);
 }
 static PyObject* py_glVertexAttrib4Niv(PyObject *self, PyObject *args) {
-  return WrapFunc2<Uint, ConstArray<Int> >::Call(self, args, glVertexAttrib4Niv);
+  return WrapFunc2<Uint, ConstArrayN<Int, 4> >::Call(self, args, glVertexAttrib4Niv);
 }
 static PyObject* py_glVertexAttrib4Nsv(PyObject *self, PyObject *args) {
-  return WrapFunc2<Uint, ConstArray<Short> >::Call(self, args, glVertexAttrib4Nsv);
+  return WrapFunc2<Uint, ConstArrayN<Short, 4> >::Call(self, args, glVertexAttrib4Nsv);
 }
 static PyObject* py_glVertexAttrib4Nubv(PyObject *self, PyObject *args) {
-  return WrapFunc2<Uint, ConstArray<Ubyte> >::Call(self, args, glVertexAttrib4Nubv);
+  return WrapFunc2<Uint, ConstArrayN<Ubyte, 4> >::Call(self, args, glVertexAttrib4Nubv);
 }
 static PyObject* py_glVertexAttrib4Nuiv(PyObject *self, PyObject *args) {
-  return WrapFunc2<Uint, ConstArray<Uint> >::Call(self, args, glVertexAttrib4Nuiv);
+  return WrapFunc2<Uint, ConstArrayN<Uint, 4> >::Call(self, args, glVertexAttrib4Nuiv);
 }
 static PyObject* py_glVertexAttrib4Nusv(PyObject *self, PyObject *args) {
-  return WrapFunc2<Uint, ConstArray<Ushort> >::Call(self, args, glVertexAttrib4Nusv);
+  return WrapFunc2<Uint, ConstArrayN<Ushort, 4> >::Call(self, args, glVertexAttrib4Nusv);
 }
 static PyObject* py_glVertexAttrib4bv(PyObject *self, PyObject *args) {
-  return WrapFunc2<Uint, ConstArray<Byte> >::Call(self, args, glVertexAttrib4bv);
+  return WrapFunc2<Uint, ConstArrayN<Byte, 4> >::Call(self, args, glVertexAttrib4bv);
 }
 static PyObject* py_glVertexAttrib4ubv(PyObject *self, PyObject *args) {
-  return WrapFunc2<Uint, ConstArray<Ubyte> >::Call(self, args, glVertexAttrib4ubv);
+  return WrapFunc2<Uint, ConstArrayN<Ubyte, 4> >::Call(self, args, glVertexAttrib4ubv);
 }
 static PyObject* py_glVertexAttrib4sv(PyObject *self, PyObject *args) {
-  return WrapFunc2<Uint, ConstArray<Short> >::Call(self, args, glVertexAttrib4sv);
+  return WrapFunc2<Uint, ConstArrayN<Short, 4> >::Call(self, args, glVertexAttrib4sv);
 }
 static PyObject* py_glVertexAttrib4usv(PyObject *self, PyObject *args) {
-  return WrapFunc2<Uint, ConstArray<Ushort> >::Call(self, args, glVertexAttrib4usv);
+  return WrapFunc2<Uint, ConstArrayN<Ushort, 4> >::Call(self, args, glVertexAttrib4usv);
 }
 static PyObject* py_glVertexAttrib4iv(PyObject *self, PyObject *args) {
-  return WrapFunc2<Uint, ConstArray<Int> >::Call(self, args, glVertexAttrib4iv);
+  return WrapFunc2<Uint, ConstArrayN<Int, 4> >::Call(self, args, glVertexAttrib4iv);
 }
 static PyObject* py_glVertexAttrib4uiv(PyObject *self, PyObject *args) {
-  return WrapFunc2<Uint, ConstArray<Uint> >::Call(self, args, glVertexAttrib4uiv);
+  return WrapFunc2<Uint, ConstArrayN<Uint, 4> >::Call(self, args, glVertexAttrib4uiv);
 }
 static PyObject* py_glVertexAttrib4fv(PyObject *self, PyObject *args) {
-  return WrapFunc2<Uint, ConstArray<Float> >::Call(self, args, glVertexAttrib4fv);
+  return WrapFunc2<Uint, ConstArrayN<Float, 4> >::Call(self, args, glVertexAttrib4fv);
 }
 static PyObject* py_glVertexAttrib4dv(PyObject *self, PyObject *args) {
-  return WrapFunc2<Uint, ConstArray<Double> >::Call(self, args, glVertexAttrib4dv);
+  return WrapFunc2<Uint, ConstArrayN<Double, 4> >::Call(self, args, glVertexAttrib4dv);
 }
 
 static PyObject* py_glVertexAttribPointer(PyObject *self, PyObject *args) {

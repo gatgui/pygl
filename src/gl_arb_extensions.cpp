@@ -35,8 +35,10 @@ static PyObject* py_glClampColorARB(PyObject *self, PyObject *args) {
 
 static PyObject* py_glDrawBuffersARB(PyObject *, PyObject *args) {
   CHECK_ARG_COUNT(args, 1);
-  Array1D<Enum> buffers(PyTuple_GetItem(args, 0));
-  glDrawBuffersARB(buffers.size(), buffers);
+  Array1D<Enum> buffers;
+  if (buffers.fromPy(PyTuple_GetItem(args, 0))) {
+    glDrawBuffersARB(buffers.size(), buffers);
+  }
   Py_RETURN_NONE;
 }
 
@@ -100,16 +102,16 @@ static PyObject* py_glMultiTexCoord2iARB(PyObject *self, PyObject *args) {
   return WrapFunc3<Enum, Int, Int >::Call(self, args, glMultiTexCoord2iARB);
 }
 static PyObject* py_glMultiTexCoord2dvARB(PyObject *self, PyObject *args) {
-  return WrapFunc2<Enum, ConstArray<Double> >::Call(self, args, glMultiTexCoord2dvARB);
+  return WrapFunc2<Enum, ConstArrayN<Double, 2> >::Call(self, args, glMultiTexCoord2dvARB);
 }
 static PyObject* py_glMultiTexCoord2fvARB(PyObject *self, PyObject *args) {
-  return WrapFunc2<Enum, ConstArray<Float> >::Call(self, args, glMultiTexCoord2fvARB);
+  return WrapFunc2<Enum, ConstArrayN<Float, 2> >::Call(self, args, glMultiTexCoord2fvARB);
 }
 static PyObject* py_glMultiTexCoord2svARB(PyObject *self, PyObject *args) {
-  return WrapFunc2<Enum, ConstArray<Short> >::Call(self, args, glMultiTexCoord2svARB);
+  return WrapFunc2<Enum, ConstArrayN<Short, 2> >::Call(self, args, glMultiTexCoord2svARB);
 }
 static PyObject* py_glMultiTexCoord2ivARB(PyObject *self, PyObject *args) {
-  return WrapFunc2<Enum, ConstArray<Int> >::Call(self, args, glMultiTexCoord2ivARB);
+  return WrapFunc2<Enum, ConstArrayN<Int, 2> >::Call(self, args, glMultiTexCoord2ivARB);
 }
 
 static PyObject* py_glMultiTexCoord3dARB(PyObject *self, PyObject *args) {
@@ -125,16 +127,16 @@ static PyObject* py_glMultiTexCoord3iARB(PyObject *self, PyObject *args) {
   return WrapFunc4<Enum, Int, Int, Int >::Call(self, args, glMultiTexCoord3iARB);
 }
 static PyObject* py_glMultiTexCoord3dvARB(PyObject *self, PyObject *args) {
-  return WrapFunc2<Enum, ConstArray<Double> >::Call(self, args, glMultiTexCoord3dvARB);
+  return WrapFunc2<Enum, ConstArrayN<Double, 3> >::Call(self, args, glMultiTexCoord3dvARB);
 }
 static PyObject* py_glMultiTexCoord3fvARB(PyObject *self, PyObject *args) {
-  return WrapFunc2<Enum, ConstArray<Float> >::Call(self, args, glMultiTexCoord3fvARB);
+  return WrapFunc2<Enum, ConstArrayN<Float, 3> >::Call(self, args, glMultiTexCoord3fvARB);
 }
 static PyObject* py_glMultiTexCoord3svARB(PyObject *self, PyObject *args) {
-  return WrapFunc2<Enum, ConstArray<Short> >::Call(self, args, glMultiTexCoord3svARB);
+  return WrapFunc2<Enum, ConstArrayN<Short, 3> >::Call(self, args, glMultiTexCoord3svARB);
 }
 static PyObject* py_glMultiTexCoord3ivARB(PyObject *self, PyObject *args) {
-  return WrapFunc2<Enum, ConstArray<Int> >::Call(self, args, glMultiTexCoord3ivARB);
+  return WrapFunc2<Enum, ConstArrayN<Int, 3> >::Call(self, args, glMultiTexCoord3ivARB);
 }
 
 static PyObject* py_glMultiTexCoord4dARB(PyObject *self, PyObject *args) {
@@ -150,16 +152,16 @@ static PyObject* py_glMultiTexCoord4iARB(PyObject *self, PyObject *args) {
   return WrapFunc5<Enum, Int, Int, Int, Int >::Call(self, args, glMultiTexCoord4iARB);
 }
 static PyObject* py_glMultiTexCoord4dvARB(PyObject *self, PyObject *args) {
-  return WrapFunc2<Enum, ConstArray<Double> >::Call(self, args, glMultiTexCoord4dvARB);
+  return WrapFunc2<Enum, ConstArrayN<Double, 4> >::Call(self, args, glMultiTexCoord4dvARB);
 }
 static PyObject* py_glMultiTexCoord4fvARB(PyObject *self, PyObject *args) {
-  return WrapFunc2<Enum, ConstArray<Float> >::Call(self, args, glMultiTexCoord4fvARB);
+  return WrapFunc2<Enum, ConstArrayN<Float, 4> >::Call(self, args, glMultiTexCoord4fvARB);
 }
 static PyObject* py_glMultiTexCoord4svARB(PyObject *self, PyObject *args) {
-  return WrapFunc2<Enum, ConstArray<Short> >::Call(self, args, glMultiTexCoord4svARB);
+  return WrapFunc2<Enum, ConstArrayN<Short, 4> >::Call(self, args, glMultiTexCoord4svARB);
 }
 static PyObject* py_glMultiTexCoord4ivARB(PyObject *self, PyObject *args) {
-  return WrapFunc2<Enum, ConstArray<Int> >::Call(self, args, glMultiTexCoord4ivARB);
+  return WrapFunc2<Enum, ConstArrayN<Int, 4> >::Call(self, args, glMultiTexCoord4ivARB);
 }
 
 // GL_ARB_occlusion_query
@@ -169,8 +171,10 @@ static PyObject* py_glBeginQueryARB(PyObject *self, PyObject *args) {
 }
 static PyObject* py_glDeleteQueriesARB(PyObject *, PyObject *args) {
   CHECK_ARG_COUNT(args, 1);
-  Array1D<Uint> ids(PyTuple_GetItem(args, 0));
-  glDeleteQueriesARB(ids.size(), ids);
+  Array1D<Uint> ids;
+  if (ids.fromPy(PyTuple_GetItem(args, 0))) {
+    glDeleteQueriesARB(ids.size(), ids);
+  }
   Py_RETURN_NONE;
 }
 static PyObject* py_glEndQueryARB(PyObject *self, PyObject *args) {
@@ -342,8 +346,10 @@ static PyObject* py_glGetUniformLocationARB(PyObject *, PyObject *args) {
 static PyObject* py_glShaderSourceARB(PyObject *, PyObject *args) {
   CHECK_ARG_COUNT(args, 2);
   Handle obj(PyTuple_GetItem(args, 0));
-  Array1D<String> string(PyTuple_GetItem(args, 2));
-  glShaderSourceARB(obj, string.size(), string, 0);
+  Array1D<String> strings;
+  if (strings.fromPy(PyTuple_GetItem(args, 2))) {
+    glShaderSourceARB(obj, strings.size(), strings, 0);
+  }
   Py_RETURN_NONE;
 }
 static PyObject* py_glGetUniformARB(PyObject *, PyObject *args) {
@@ -546,17 +552,16 @@ static PyObject* py_glGetCompressedTexImageARB(PyObject *self, PyObject *args) {
 // GL_ARB_transpose_matrix
 
 static PyObject* py_glLoadTransposeMatrixdARB(PyObject *self, PyObject *args) {
-  // WrapFunc1<CheckSize<Array<Double>, 16>, glLoadTransposeMatrixdARB>::Call(self, args);
-  return WrapFunc1<Array<Double> >::Call(self, args, glLoadTransposeMatrixdARB);
+  return WrapFunc1<ArrayN<Double, 16> >::Call(self, args, glLoadTransposeMatrixdARB);
 }
 static PyObject* py_glLoadTransposeMatrixfARB(PyObject *self, PyObject *args) {
-  return WrapFunc1<Array<Float> >::Call(self, args, glLoadTransposeMatrixfARB);
+  return WrapFunc1<ArrayN<Float, 16> >::Call(self, args, glLoadTransposeMatrixfARB);
 }
 static PyObject* py_glMultTransposeMatrixdARB(PyObject *self, PyObject *args) {
-  return WrapFunc1<Array<Double> >::Call(self, args, glMultTransposeMatrixdARB);
+  return WrapFunc1<ArrayN<Double, 16> >::Call(self, args, glMultTransposeMatrixdARB);
 }
 static PyObject* py_glMultTransposeMatrixfARB(PyObject *self, PyObject *args) {
-  return WrapFunc1<Array<Float> >::Call(self, args, glMultTransposeMatrixfARB);
+  return WrapFunc1<ArrayN<Float, 16> >::Call(self, args, glMultTransposeMatrixfARB);
 }
 
 // GL_ARB_vertex_weight
@@ -569,50 +574,66 @@ static PyObject* py_glWeightPointerARB(PyObject *self, PyObject *args) {
 }
 static PyObject* py_glWeightbvARB(PyObject *, PyObject *args) {
   CHECK_ARG_COUNT(args, 1);
-  Array1D<Byte> weights(PyTuple_GetItem(args, 0));
-  glWeightbvARB(weights.size(), weights);
+  Array1D<Byte> weights;
+  if (weights.fromPy(PyTuple_GetItem(args, 0))) {
+    glWeightbvARB(weights.size(), weights);
+  }
   Py_RETURN_NONE;
 }
 static PyObject* py_glWeightdvARB(PyObject *, PyObject *args) {
   CHECK_ARG_COUNT(args, 1);
-  Array1D<Double> weights(PyTuple_GetItem(args, 0));
-  glWeightdvARB(weights.size(), weights);
+  Array1D<Double> weights;
+  if (weights.fromPy(PyTuple_GetItem(args, 0))) {
+    glWeightdvARB(weights.size(), weights);
+  }
   Py_RETURN_NONE;
 }
 static PyObject* py_glWeightfvARB(PyObject *, PyObject *args) {
   CHECK_ARG_COUNT(args, 1);
-  Array1D<Float> weights(PyTuple_GetItem(args, 0));
-  glWeightfvARB(weights.size(), weights);
+  Array1D<Float> weights;
+  if (weights.fromPy(PyTuple_GetItem(args, 0))) {
+    glWeightfvARB(weights.size(), weights);
+  }
   Py_RETURN_NONE;
 }
 static PyObject* py_glWeightivARB(PyObject *, PyObject *args) {
   CHECK_ARG_COUNT(args, 1);
-  Array1D<Int> weights(PyTuple_GetItem(args, 0));
-  glWeightivARB(weights.size(), weights);
+  Array1D<Int> weights;
+  if (weights.fromPy(PyTuple_GetItem(args, 0))) {
+    glWeightivARB(weights.size(), weights);
+  }
   Py_RETURN_NONE;
 }
 static PyObject* py_glWeightsvARB(PyObject *, PyObject *args) {
   CHECK_ARG_COUNT(args, 1);
-  Array1D<Short> weights(PyTuple_GetItem(args, 0));
-  glWeightsvARB(weights.size(), weights);
+  Array1D<Short> weights;
+  if (weights.fromPy(PyTuple_GetItem(args, 0))) {
+    glWeightsvARB(weights.size(), weights);
+  }
   Py_RETURN_NONE;
 }
 static PyObject* py_glWeightubvARB(PyObject *, PyObject *args) {
   CHECK_ARG_COUNT(args, 1);
-  Array1D<Ubyte> weights(PyTuple_GetItem(args, 0));
-  glWeightubvARB(weights.size(), weights);
+  Array1D<Ubyte> weights;
+  if (weights.fromPy(PyTuple_GetItem(args, 0))) {
+    glWeightubvARB(weights.size(), weights);
+  }
   Py_RETURN_NONE;
 }
 static PyObject* py_glWeightuivARB(PyObject *, PyObject *args) {
   CHECK_ARG_COUNT(args, 1);
-  Array1D<Uint> weights(PyTuple_GetItem(args, 0));
-  glWeightuivARB(weights.size(), weights);
+  Array1D<Uint> weights;
+  if (weights.fromPy(PyTuple_GetItem(args, 0))) {
+    glWeightuivARB(weights.size(), weights);
+  }
   Py_RETURN_NONE;
 }
 static PyObject* py_glWeightusvARB(PyObject *, PyObject *args) {
   CHECK_ARG_COUNT(args, 1);
-  Array1D<Ushort> weights(PyTuple_GetItem(args, 0));
-  glWeightusvARB(weights.size(), weights);
+  Array1D<Ushort> weights;
+  if (weights.fromPy(PyTuple_GetItem(args, 0))) {
+    glWeightusvARB(weights.size(), weights);
+  }
   Py_RETURN_NONE;
 }
 
@@ -629,8 +650,10 @@ static PyObject* py_glBufferSubDataARB(PyObject *self, PyObject *args) {
 }
 static PyObject* py_glDeleteBuffersARB(PyObject *, PyObject *args) {
   CHECK_ARG_COUNT(args, 1);
-  Array1D<Uint> buffers(PyTuple_GetItem(args, 0));
-  glDeleteBuffersARB(buffers.size(), buffers);
+  Array1D<Uint> buffers;
+  if (buffers.fromPy(PyTuple_GetItem(args, 0))) {
+    glDeleteBuffersARB(buffers.size(), buffers);
+  }
   Py_RETURN_NONE;
 }
 static PyObject* py_glGenBuffersARB(PyObject *, PyObject *args) {
@@ -703,8 +726,10 @@ static PyObject* py_glBindProgramARB(PyObject *self, PyObject *args) {
 }
 static PyObject* py_glDeleteProgramsARB(PyObject *, PyObject *args) {
   CHECK_ARG_COUNT(args, 1);
-  Array1D<Uint> progs(PyTuple_GetItem(args, 0));
-  glDeleteProgramsARB(progs.size(), progs);
+  Array1D<Uint> progs;
+  if (progs.fromPy(PyTuple_GetItem(args, 0))) {
+    glDeleteProgramsARB(progs.size(), progs);
+  }
   Py_RETURN_NONE;
 }
 static PyObject* py_glDisableVertexAttribArrayARB(PyObject *self, PyObject *args) {
@@ -815,25 +840,25 @@ static PyObject* py_glProgramEnvParameter4dARB(PyObject *self, PyObject *args) {
   return WrapFunc6<Enum, Uint, Double, Double, Double, Double >::Call(self, args, glProgramEnvParameter4dARB);
 }
 static PyObject* py_glProgramEnvParameter4dvARB(PyObject *self, PyObject *args) {
-  return WrapFunc3<Enum, Uint, ConstArray<Double> >::Call(self, args, glProgramEnvParameter4dvARB);
+  return WrapFunc3<Enum, Uint, ConstArrayN<Double, 4> >::Call(self, args, glProgramEnvParameter4dvARB);
 }
 static PyObject* py_glProgramEnvParameter4fARB(PyObject *self, PyObject *args) {
   return WrapFunc6<Enum, Uint, Float, Float, Float, Float >::Call(self, args, glProgramEnvParameter4fARB);
 }
 static PyObject* py_glProgramEnvParameter4fvARB(PyObject *self, PyObject *args) {
-  return WrapFunc3<Enum, Uint, ConstArray<Float> >::Call(self, args, glProgramEnvParameter4fvARB);
+  return WrapFunc3<Enum, Uint, ConstArrayN<Float, 4> >::Call(self, args, glProgramEnvParameter4fvARB);
 }
 static PyObject* py_glProgramLocalParameter4dARB(PyObject *self, PyObject *args) {
   return WrapFunc6<Enum, Uint, Double, Double, Double, Double >::Call(self, args, glProgramLocalParameter4dARB);
 }
 static PyObject* py_glProgramLocalParameter4dvARB(PyObject *self, PyObject *args) {
-  return WrapFunc3<Enum, Uint, ConstArray<Double> >::Call(self, args, glProgramLocalParameter4dvARB);
+  return WrapFunc3<Enum, Uint, ConstArrayN<Double, 4> >::Call(self, args, glProgramLocalParameter4dvARB);
 }
 static PyObject* py_glProgramLocalParameter4fARB(PyObject *self, PyObject *args) {
   return WrapFunc6<Enum, Uint, Float, Float, Float, Float >::Call(self, args, glProgramLocalParameter4fARB);
 }
 static PyObject* py_glProgramLocalParameter4fvARB(PyObject *self, PyObject *args) {
-  return WrapFunc3<Enum, Uint, ConstArray<Float> >::Call(self, args, glProgramLocalParameter4fvARB);
+  return WrapFunc3<Enum, Uint, ConstArrayN<Float, 4> >::Call(self, args, glProgramLocalParameter4fvARB);
 }
 static PyObject* py_glProgramStringARB(PyObject *, PyObject *args) {
   CHECK_ARG_COUNT(args, 3);
@@ -851,19 +876,19 @@ static PyObject* py_glVertexAttrib2dARB(PyObject *self, PyObject *args) {
   return WrapFunc3<Uint, Double, Double >::Call(self, args, glVertexAttrib2dARB);
 }
 static PyObject* py_glVertexAttrib2dvARB(PyObject *self, PyObject *args) {
-  return WrapFunc2<Uint, ConstArray<Double> >::Call(self, args, glVertexAttrib2dvARB);
+  return WrapFunc2<Uint, ConstArrayN<Double, 2> >::Call(self, args, glVertexAttrib2dvARB);
 }
 static PyObject* py_glVertexAttrib3dARB(PyObject *self, PyObject *args) {
   return WrapFunc4<Uint, Double, Double, Double >::Call(self, args, glVertexAttrib3dARB);
 }
 static PyObject* py_glVertexAttrib3dvARB(PyObject *self, PyObject *args) {
-  return WrapFunc2<Uint, ConstArray<Double> >::Call(self, args, glVertexAttrib3dvARB);
+  return WrapFunc2<Uint, ConstArrayN<Double, 3> >::Call(self, args, glVertexAttrib3dvARB);
 }
 static PyObject* py_glVertexAttrib4dARB(PyObject *self, PyObject *args) {
   return WrapFunc5<Uint, Double, Double, Double, Double >::Call(self, args, glVertexAttrib4dARB);
 }
 static PyObject* py_glVertexAttrib4dvARB(PyObject *self, PyObject *args) {
-  return WrapFunc2<Uint, ConstArray<Double> >::Call(self, args, glVertexAttrib4dvARB);
+  return WrapFunc2<Uint, ConstArrayN<Double, 4> >::Call(self, args, glVertexAttrib4dvARB);
 }
 static PyObject* py_glVertexAttrib1fARB(PyObject *self, PyObject *args) {
   return WrapFunc2<Uint, Float >::Call(self, args, glVertexAttrib1fARB);
@@ -872,19 +897,19 @@ static PyObject* py_glVertexAttrib2fARB(PyObject *self, PyObject *args) {
   return WrapFunc3<Uint, Float, Float >::Call(self, args, glVertexAttrib2fARB);
 }
 static PyObject* py_glVertexAttrib2fvARB(PyObject *self, PyObject *args) {
-  return WrapFunc2<Uint, ConstArray<Float> >::Call(self, args, glVertexAttrib2fvARB);
+  return WrapFunc2<Uint, ConstArrayN<Float, 2> >::Call(self, args, glVertexAttrib2fvARB);
 }
 static PyObject* py_glVertexAttrib3fARB(PyObject *self, PyObject *args) {
   return WrapFunc4<Uint, Float, Float, Float >::Call(self, args, glVertexAttrib3fARB);
 }
 static PyObject* py_glVertexAttrib3fvARB(PyObject *self, PyObject *args) {
-  return WrapFunc2<Uint, ConstArray<Float> >::Call(self, args, glVertexAttrib3fvARB);
+  return WrapFunc2<Uint, ConstArrayN<Float, 3> >::Call(self, args, glVertexAttrib3fvARB);
 }
 static PyObject* py_glVertexAttrib4fARB(PyObject *self, PyObject *args) {
   return WrapFunc5<Uint, Float, Float, Float, Float >::Call(self, args, glVertexAttrib4fARB);
 }
 static PyObject* py_glVertexAttrib4fvARB(PyObject *self, PyObject *args) {
-  return WrapFunc2<Uint, ConstArray<Float> >::Call(self, args, glVertexAttrib4fvARB);
+  return WrapFunc2<Uint, ConstArrayN<Float, 4> >::Call(self, args, glVertexAttrib4fvARB);
 }
 static PyObject* py_glVertexAttrib1sARB(PyObject *self, PyObject *args) {
   return WrapFunc2<Uint, Short >::Call(self, args, glVertexAttrib1sARB);
@@ -893,52 +918,52 @@ static PyObject* py_glVertexAttrib2sARB(PyObject *self, PyObject *args) {
   return WrapFunc3<Uint, Short, Short >::Call(self, args, glVertexAttrib2sARB);
 }
 static PyObject* py_glVertexAttrib2svARB(PyObject *self, PyObject *args) {
-  return WrapFunc2<Uint, ConstArray<Short> >::Call(self, args, glVertexAttrib2svARB);
+  return WrapFunc2<Uint, ConstArrayN<Short, 2> >::Call(self, args, glVertexAttrib2svARB);
 }
 static PyObject* py_glVertexAttrib3sARB(PyObject *self, PyObject *args) {
   return WrapFunc4<Uint, Short, Short, Short >::Call(self, args, glVertexAttrib3sARB);
 }
 static PyObject* py_glVertexAttrib3svARB(PyObject *self, PyObject *args) {
-  return WrapFunc2<Uint, ConstArray<Short> >::Call(self, args, glVertexAttrib3svARB);
+  return WrapFunc2<Uint, ConstArrayN<Short, 3> >::Call(self, args, glVertexAttrib3svARB);
 }
 static PyObject* py_glVertexAttrib4sARB(PyObject *self, PyObject *args) {
   return WrapFunc5<Uint, Short, Short, Short, Short >::Call(self, args, glVertexAttrib4sARB);
 }
 static PyObject* py_glVertexAttrib4svARB(PyObject *self, PyObject *args) {
-  return WrapFunc2<Uint, ConstArray<Short> >::Call(self, args, glVertexAttrib4svARB);
+  return WrapFunc2<Uint, ConstArrayN<Short, 4> >::Call(self, args, glVertexAttrib4svARB);
 }
 static PyObject* py_glVertexAttrib4NbvARB(PyObject *self, PyObject *args) {
-  return WrapFunc2<Uint, ConstArray<Byte> >::Call(self, args, glVertexAttrib4NbvARB);
+  return WrapFunc2<Uint, ConstArrayN<Byte, 4> >::Call(self, args, glVertexAttrib4NbvARB);
 }
 static PyObject* py_glVertexAttrib4NivARB(PyObject *self, PyObject *args) {
-  return WrapFunc2<Uint, ConstArray<Int> >::Call(self, args, glVertexAttrib4NivARB);
+  return WrapFunc2<Uint, ConstArrayN<Int, 4> >::Call(self, args, glVertexAttrib4NivARB);
 }
 static PyObject* py_glVertexAttrib4NsvARB(PyObject *self, PyObject *args) {
-  return WrapFunc2<Uint, ConstArray<Short> >::Call(self, args, glVertexAttrib4NsvARB);
+  return WrapFunc2<Uint, ConstArrayN<Short, 4> >::Call(self, args, glVertexAttrib4NsvARB);
 }
 static PyObject* py_glVertexAttrib4NubvARB(PyObject *self, PyObject *args) {
-  return WrapFunc2<Uint, ConstArray<Ubyte> >::Call(self, args, glVertexAttrib4NubvARB);
+  return WrapFunc2<Uint, ConstArrayN<Ubyte, 4> >::Call(self, args, glVertexAttrib4NubvARB);
 }
 static PyObject* py_glVertexAttrib4NuivARB(PyObject *self, PyObject *args) {
-  return WrapFunc2<Uint, ConstArray<Uint> >::Call(self, args, glVertexAttrib4NuivARB);
+  return WrapFunc2<Uint, ConstArrayN<Uint, 4> >::Call(self, args, glVertexAttrib4NuivARB);
 }
 static PyObject* py_glVertexAttrib4NusvARB(PyObject *self, PyObject *args) {
-  return WrapFunc2<Uint, ConstArray<Ushort> >::Call(self, args, glVertexAttrib4NusvARB);
+  return WrapFunc2<Uint, ConstArrayN<Ushort, 4> >::Call(self, args, glVertexAttrib4NusvARB);
 }
 static PyObject* py_glVertexAttrib4bvARB(PyObject *self, PyObject *args) {
-  return WrapFunc2<Uint, ConstArray<Byte> >::Call(self, args, glVertexAttrib4bvARB);
+  return WrapFunc2<Uint, ConstArrayN<Byte, 4> >::Call(self, args, glVertexAttrib4bvARB);
 }
 static PyObject* py_glVertexAttrib4ivARB(PyObject *self, PyObject *args) {
-  return WrapFunc2<Uint, ConstArray<Int> >::Call(self, args, glVertexAttrib4ivARB);
+  return WrapFunc2<Uint, ConstArrayN<Int, 4> >::Call(self, args, glVertexAttrib4ivARB);
 }
 static PyObject* py_glVertexAttrib4ubvARB(PyObject *self, PyObject *args) {
-  return WrapFunc2<Uint, ConstArray<Ubyte> >::Call(self, args, glVertexAttrib4ubvARB);
+  return WrapFunc2<Uint, ConstArrayN<Ubyte, 4> >::Call(self, args, glVertexAttrib4ubvARB);
 }
 static PyObject* py_glVertexAttrib4uivARB(PyObject *self, PyObject *args) {
-  return WrapFunc2<Uint, ConstArray<Uint> >::Call(self, args, glVertexAttrib4uivARB);
+  return WrapFunc2<Uint, ConstArrayN<Uint, 4> >::Call(self, args, glVertexAttrib4uivARB);
 }
 static PyObject* py_glVertexAttrib4usvARB(PyObject *self, PyObject *args) {
-  return WrapFunc2<Uint, ConstArray<Ushort> >::Call(self, args, glVertexAttrib4usvARB);
+  return WrapFunc2<Uint, ConstArrayN<Ushort, 4> >::Call(self, args, glVertexAttrib4usvARB);
 }
 static PyObject* py_glVertexAttrib4NubARB(PyObject *self, PyObject *args) {
   return WrapFunc5<Uint, Ubyte, Ubyte, Ubyte, Ubyte >::Call(self, args, glVertexAttrib4NubARB);
@@ -1030,49 +1055,49 @@ static PyObject* py_glWindowPos2dARB(PyObject *self, PyObject *args) {
   return WrapFunc2<Double, Double >::Call(self, args, glWindowPos2dARB);
 }
 static PyObject* py_glWindowPos2dvARB(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Double> >::Call(self, args, glWindowPos2dvARB);
+  return WrapFunc1<ConstArrayN<Double, 2> >::Call(self, args, glWindowPos2dvARB);
 }
 static PyObject* py_glWindowPos3dARB(PyObject *self, PyObject *args) {
   return WrapFunc3<Double, Double, Double >::Call(self, args, glWindowPos3dARB);
 }
 static PyObject* py_glWindowPos3dvARB(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Double> >::Call(self, args, glWindowPos3dvARB);
+  return WrapFunc1<ConstArrayN<Double, 3> >::Call(self, args, glWindowPos3dvARB);
 }
 static PyObject* py_glWindowPos2fARB(PyObject *self, PyObject *args) {
   return WrapFunc2<Float, Float >::Call(self, args, glWindowPos2fARB);
 }
 static PyObject* py_glWindowPos2fvARB(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Float> >::Call(self, args, glWindowPos2fvARB);
+  return WrapFunc1<ConstArrayN<Float, 2> >::Call(self, args, glWindowPos2fvARB);
 }
 static PyObject* py_glWindowPos3fARB(PyObject *self, PyObject *args) {
   return WrapFunc3<Float, Float, Float >::Call(self, args, glWindowPos3fARB);
 }
 static PyObject* py_glWindowPos3fvARB(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Float> >::Call(self, args, glWindowPos3fvARB);
+  return WrapFunc1<ConstArrayN<Float, 3> >::Call(self, args, glWindowPos3fvARB);
 }
 static PyObject* py_glWindowPos2iARB(PyObject *self, PyObject *args) {
   return WrapFunc2<Int, Int >::Call(self, args, glWindowPos2iARB);
 }
 static PyObject* py_glWindowPos2ivARB(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Int> >::Call(self, args, glWindowPos2ivARB);
+  return WrapFunc1<ConstArrayN<Int, 2> >::Call(self, args, glWindowPos2ivARB);
 }
 static PyObject* py_glWindowPos3iARB(PyObject *self, PyObject *args) {
   return WrapFunc3<Int, Int, Int >::Call(self, args, glWindowPos3iARB);
 }
 static PyObject* py_glWindowPos3ivARB(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Int> >::Call(self, args, glWindowPos3ivARB);
+  return WrapFunc1<ConstArrayN<Int, 3> >::Call(self, args, glWindowPos3ivARB);
 }
 static PyObject* py_glWindowPos2sARB(PyObject *self, PyObject *args) {
   return WrapFunc2<Short, Short >::Call(self, args, glWindowPos2sARB);
 }
 static PyObject* py_glWindowPos2svARB(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Short> >::Call(self, args, glWindowPos2svARB);
+  return WrapFunc1<ConstArrayN<Short, 2> >::Call(self, args, glWindowPos2svARB);
 }
 static PyObject* py_glWindowPos3sARB(PyObject *self, PyObject *args) {
   return WrapFunc3<Short, Short, Short >::Call(self, args, glWindowPos3sARB);
 }
 static PyObject* py_glWindowPos3svARB(PyObject *self, PyObject *args) {
-  return WrapFunc1<ConstArray<Short> >::Call(self, args, glWindowPos3svARB);
+  return WrapFunc1<ConstArrayN<Short, 3> >::Call(self, args, glWindowPos3svARB);
 }
 
 // GL_ARB_imaging

@@ -117,7 +117,7 @@ def drawMesh():
     for e in mesh:
       gl.MultiTexCoord2f(gl.TEXTURE0, e.texcoord.s, e.texcoord.t);
       gl.Color3f(1, 1, 1)
-      gl.Vertex3fv(e.position) #PySequence_Size won't return 3 but 20 (4 * 5) always
+      gl.Vertex3fv(e.position)
     gl.End()
 
 def initShaders():

@@ -15,8 +15,8 @@ prjs = [
     "incdirs" : ["include"],
     "srcs"    : glob.glob("src/*.cpp") + glob.glob("src/mem/*.cpp") + ["src/glew.c"],
     "ext"     : python.ModuleExtension(),
-    "prefix"  : python.ModulePrefix(),
-    "custom"  : [python.Require, glut.Require]
+    "prefix"  : python.ModulePrefix() + "/" + python.Version(),
+    "custom"  : [python.SoftRequire, glut.Require]
   }
 ]
 

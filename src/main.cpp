@@ -28,7 +28,13 @@ extern bool PyGL_InitGL(PyObject *mod);
 extern bool PyGL_InitGLU(PyObject *mod);
 extern bool PyGL_InitGLUT(PyObject *mod);
 
-PyMODINIT_FUNC initpygl(void)
+extern "C"
+#ifdef _WIN32
+__declspec(dllexport)
+#else
+__attribute__ ((visibility ("default")))
+#endif
+void initpygl(void)
 {
   PyObject *mod = Py_InitModule("pygl", 0);
   

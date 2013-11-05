@@ -1809,6 +1809,7 @@ bool PyGL_InitGLU(PyObject *mod)
   
   if (mod != NULL)
   {
+    Py_INCREF(smod);
     PyModule_AddObject(mod, "glu", smod);
   }
   

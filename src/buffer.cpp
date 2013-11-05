@@ -1802,6 +1802,7 @@ bool PyGL_InitBuffer(PyObject *mod)
   PyModule_AddIntConstant(smod, "Float", DT_FLOAT);
   PyModule_AddIntConstant(smod, "Double", DT_DOUBLE);
   
+  Py_INCREF(smod);
   PyModule_AddObject(mod, "buffer", smod);
   
   return true;
